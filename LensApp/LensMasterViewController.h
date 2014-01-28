@@ -11,6 +11,7 @@
 @class LensDetailViewController;
 
 #import <CoreData/CoreData.h>
+#import "LensPost.h"
 
 @interface LensMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 

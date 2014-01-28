@@ -1,1226 +1,618 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>33B06DD0979148EB8E7C0407</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Pods-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>5D88A05A68EE4C4FAF04D141</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Pods.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>911B04E55A30497789C367DC</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>B538BB5316864AF98F063ED1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>E2DE5F6974B74BEF99CFB478</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBBE1893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBD21893036D0052E182</string>
-				<string>C3ACEBFB1893036E0052E182</string>
-				<string>C3ACEBC91893036D0052E182</string>
-				<string>C3ACEBC81893036D0052E182</string>
-				<string>5D88A05A68EE4C4FAF04D141</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBBF1893036D0052E182</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>CLASSPREFIX</key>
-				<string>Lens</string>
-				<key>LastUpgradeCheck</key>
-				<string>0500</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>GeoffMacDonald</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>C3ACEBF21893036E0052E182</key>
-					<dict>
-						<key>TestTargetID</key>
-						<string>C3ACEBC61893036D0052E182</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>C3ACEBC21893036D0052E182</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>C3ACEBBE1893036D0052E182</string>
-			<key>productRefGroup</key>
-			<string>C3ACEBC81893036D0052E182</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>C3ACEBC61893036D0052E182</string>
-				<string>C3ACEBF21893036E0052E182</string>
-			</array>
-		</dict>
-		<key>C3ACEBC21893036D0052E182</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>C3ACEC031893036E0052E182</string>
-				<string>C3ACEC041893036E0052E182</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>C3ACEBC31893036D0052E182</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C3ACEBDD1893036D0052E182</string>
-				<string>C3ACEBEC1893036D0052E182</string>
-				<string>C3ACEBE61893036D0052E182</string>
-				<string>C3ACEBE91893036D0052E182</string>
-				<string>C3ACEBD91893036D0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>C3ACEBC41893036D0052E182</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C3ACEBCD1893036D0052E182</string>
-				<string>C3ACEBD11893036D0052E182</string>
-				<string>C3ACEBCF1893036D0052E182</string>
-				<string>C3ACEBCB1893036D0052E182</string>
-				<string>B538BB5316864AF98F063ED1</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>C3ACEBC51893036D0052E182</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C3ACEBE31893036D0052E182</string>
-				<string>C3ACEBEE1893036D0052E182</string>
-				<string>C3ACEBE01893036D0052E182</string>
-				<string>C3ACEBD71893036D0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>C3ACEBC61893036D0052E182</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>C3ACEC051893036E0052E182</string>
-			<key>buildPhases</key>
-			<array>
-				<string>911B04E55A30497789C367DC</string>
-				<string>C3ACEBC31893036D0052E182</string>
-				<string>C3ACEBC41893036D0052E182</string>
-				<string>C3ACEBC51893036D0052E182</string>
-				<string>33B06DD0979148EB8E7C0407</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>LensApp</string>
-			<key>productName</key>
-			<string>LensApp</string>
-			<key>productReference</key>
-			<string>C3ACEBC71893036D0052E182</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>C3ACEBC71893036D0052E182</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>LensApp.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>C3ACEBC81893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBC71893036D0052E182</string>
-				<string>C3ACEBF31893036E0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBC91893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBCA1893036D0052E182</string>
-				<string>C3ACEBCC1893036D0052E182</string>
-				<string>C3ACEBCE1893036D0052E182</string>
-				<string>C3ACEBD01893036D0052E182</string>
-				<string>C3ACEBF41893036E0052E182</string>
-				<string>E2DE5F6974B74BEF99CFB478</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBCA1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>C3ACEBCB1893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBCA1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBCC1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreGraphics.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreGraphics.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>C3ACEBCD1893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBCC1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBCE1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>C3ACEBCF1893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBCE1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBD01893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreData.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreData.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>C3ACEBD11893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBD01893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBD21893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBDB1893036D0052E182</string>
-				<string>C3ACEBDC1893036D0052E182</string>
-				<string>C3ACEBDE1893036D0052E182</string>
-				<string>C3ACEBE11893036D0052E182</string>
-				<string>C3ACEBE71893036D0052E182</string>
-				<string>C3ACEBE81893036D0052E182</string>
-				<string>C3ACEBEA1893036D0052E182</string>
-				<string>C3ACEBEB1893036D0052E182</string>
-				<string>C3ACEBED1893036D0052E182</string>
-				<string>C3ACEBE41893036D0052E182</string>
-				<string>C3ACEBD31893036D0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>LensApp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBD31893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBD41893036D0052E182</string>
-				<string>C3ACEBD51893036D0052E182</string>
-				<string>C3ACEBD81893036D0052E182</string>
-				<string>C3ACEBDA1893036D0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBD41893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>LensApp-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBD51893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBD61893036D0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBD61893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBD71893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBD51893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBD81893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBD91893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBD81893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBDA1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>LensApp-Prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBDB1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>LensAppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBDC1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>LensAppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBDD1893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBDC1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBDE1893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBDF1893036D0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main_iPhone.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBDF1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main_iPhone.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBE01893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBDE1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBE11893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBE21893036D0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main_iPad.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBE21893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main_iPad.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBE31893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBE11893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBE41893036D0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBE51893036D0052E182</string>
-			</array>
-			<key>currentVersion</key>
-			<string>C3ACEBE51893036D0052E182</string>
-			<key>isa</key>
-			<string>XCVersionGroup</string>
-			<key>path</key>
-			<string>LensApp.xcdatamodeld</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-			<key>versionGroupType</key>
-			<string>wrapper.xcdatamodel</string>
-		</dict>
-		<key>C3ACEBE51893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.xcdatamodel</string>
-			<key>path</key>
-			<string>LensApp.xcdatamodel</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBE61893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBE41893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBE71893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>LensMasterViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBE81893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>LensMasterViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBE91893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBE81893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBEA1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>LensDetailViewController.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBEB1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>LensDetailViewController.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBEC1893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBEB1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBED1893036D0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBEE1893036D0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBED1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBEF1893036E0052E182</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C3ACEC021893036E0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>C3ACEBF01893036E0052E182</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C3ACEBF51893036E0052E182</string>
-				<string>C3ACEBF81893036E0052E182</string>
-				<string>C3ACEBF71893036E0052E182</string>
-				<string>C3ACEBF61893036E0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>C3ACEBF11893036E0052E182</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C3ACEC001893036E0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>C3ACEBF21893036E0052E182</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>C3ACEC081893036E0052E182</string>
-			<key>buildPhases</key>
-			<array>
-				<string>C3ACEBEF1893036E0052E182</string>
-				<string>C3ACEBF01893036E0052E182</string>
-				<string>C3ACEBF11893036E0052E182</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>C3ACEBFA1893036E0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>LensAppTests</string>
-			<key>productName</key>
-			<string>LensAppTests</string>
-			<key>productReference</key>
-			<string>C3ACEBF31893036E0052E182</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>C3ACEBF31893036E0052E182</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>LensAppTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>C3ACEBF41893036E0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>XCTest.framework</string>
-			<key>path</key>
-			<string>Library/Frameworks/XCTest.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>C3ACEBF51893036E0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBF41893036E0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBF61893036E0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBCA1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBF71893036E0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBCE1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBF81893036E0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBD01893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEBF91893036E0052E182</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>C3ACEBBF1893036D0052E182</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>C3ACEBC61893036D0052E182</string>
-			<key>remoteInfo</key>
-			<string>LensApp</string>
-		</dict>
-		<key>C3ACEBFA1893036E0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>C3ACEBC61893036D0052E182</string>
-			<key>targetProxy</key>
-			<string>C3ACEBF91893036E0052E182</string>
-		</dict>
-		<key>C3ACEBFB1893036E0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEC011893036E0052E182</string>
-				<string>C3ACEBFC1893036E0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>LensAppTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBFC1893036E0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBFD1893036E0052E182</string>
-				<string>C3ACEBFE1893036E0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBFD1893036E0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>LensAppTests-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBFE1893036E0052E182</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>C3ACEBFF1893036E0052E182</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEBFF1893036E0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEC001893036E0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEBFE1893036E0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEC011893036E0052E182</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>LensAppTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3ACEC021893036E0052E182</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C3ACEC011893036E0052E182</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3ACEC031893036E0052E182</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>C3ACEC041893036E0052E182</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.0</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>C3ACEC051893036E0052E182</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>C3ACEC061893036E0052E182</string>
-				<string>C3ACEC071893036E0052E182</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>C3ACEC061893036E0052E182</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>5D88A05A68EE4C4FAF04D141</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>LensApp/LensApp-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>LensApp/LensApp-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>C3ACEC071893036E0052E182</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>5D88A05A68EE4C4FAF04D141</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>LensApp/LensApp-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>LensApp/LensApp-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>C3ACEC081893036E0052E182</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>C3ACEC091893036E0052E182</string>
-				<string>C3ACEC0A1893036E0052E182</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>C3ACEC091893036E0052E182</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/LensApp.app/LensApp</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(inherited)</string>
-					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>LensApp/LensApp-Prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>LensAppTests/LensAppTests-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>xctest</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>C3ACEC0A1893036E0052E182</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ARCHS</key>
-				<string>$(ARCHS_STANDARD_INCLUDING_64_BIT)</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/LensApp.app/LensApp</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(inherited)</string>
-					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>LensApp/LensApp-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>LensAppTests/LensAppTests-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>xctest</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>E2DE5F6974B74BEF99CFB478</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>C3ACEBBF1893036D0052E182</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B538BB5316864AF98F063ED1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2DE5F6974B74BEF99CFB478 /* libPods.a */; };
+		C37B07AA189808C300E99727 /* LensNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07A9189808C300E99727 /* LensNetworkController.m */; };
+		C37B07AD189814D400E99727 /* LensPost.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07AC189814D400E99727 /* LensPost.m */; };
+		C37B07B0189816A000E99727 /* LensStory.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07AF189816A000E99727 /* LensStory.m */; };
+		C37B07B3189819A500E99727 /* LensAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07B2189819A500E99727 /* LensAuthor.m */; };
+		C37B07C518982CE700E99727 /* LensAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07C418982CE700E99727 /* LensAsset.m */; };
+		C3ACEBCB1893036D0052E182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBCA1893036D0052E182 /* Foundation.framework */; };
+		C3ACEBCD1893036D0052E182 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBCC1893036D0052E182 /* CoreGraphics.framework */; };
+		C3ACEBCF1893036D0052E182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBCE1893036D0052E182 /* UIKit.framework */; };
+		C3ACEBD11893036D0052E182 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBD01893036D0052E182 /* CoreData.framework */; };
+		C3ACEBD71893036D0052E182 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3ACEBD51893036D0052E182 /* InfoPlist.strings */; };
+		C3ACEBD91893036D0052E182 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ACEBD81893036D0052E182 /* main.m */; };
+		C3ACEBDD1893036D0052E182 /* LensAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ACEBDC1893036D0052E182 /* LensAppDelegate.m */; };
+		C3ACEBE01893036D0052E182 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3ACEBDE1893036D0052E182 /* Main_iPhone.storyboard */; };
+		C3ACEBE31893036D0052E182 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3ACEBE11893036D0052E182 /* Main_iPad.storyboard */; };
+		C3ACEBE61893036D0052E182 /* LensApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3ACEBE41893036D0052E182 /* LensApp.xcdatamodeld */; };
+		C3ACEBE91893036D0052E182 /* LensMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ACEBE81893036D0052E182 /* LensMasterViewController.m */; };
+		C3ACEBEC1893036D0052E182 /* LensDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ACEBEB1893036D0052E182 /* LensDetailViewController.m */; };
+		C3ACEBEE1893036D0052E182 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3ACEBED1893036D0052E182 /* Images.xcassets */; };
+		C3ACEBF51893036E0052E182 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBF41893036E0052E182 /* XCTest.framework */; };
+		C3ACEBF61893036E0052E182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBCA1893036D0052E182 /* Foundation.framework */; };
+		C3ACEBF71893036E0052E182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBCE1893036D0052E182 /* UIKit.framework */; };
+		C3ACEBF81893036E0052E182 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBD01893036D0052E182 /* CoreData.framework */; };
+		C3ACEC001893036E0052E182 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3ACEBFE1893036E0052E182 /* InfoPlist.strings */; };
+		C3ACEC021893036E0052E182 /* LensAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C3ACEC011893036E0052E182 /* LensAppTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C3ACEBF91893036E0052E182 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C3ACEBBF1893036D0052E182 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C3ACEBC61893036D0052E182;
+			remoteInfo = LensApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5D88A05A68EE4C4FAF04D141 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C37B07A8189808C300E99727 /* LensNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensNetworkController.h; sourceTree = "<group>"; };
+		C37B07A9189808C300E99727 /* LensNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensNetworkController.m; sourceTree = "<group>"; };
+		C37B07AB189814D400E99727 /* LensPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensPost.h; sourceTree = "<group>"; };
+		C37B07AC189814D400E99727 /* LensPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensPost.m; sourceTree = "<group>"; };
+		C37B07AE189816A000E99727 /* LensStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensStory.h; sourceTree = "<group>"; };
+		C37B07AF189816A000E99727 /* LensStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensStory.m; sourceTree = "<group>"; };
+		C37B07B1189819A500E99727 /* LensAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensAuthor.h; sourceTree = "<group>"; };
+		C37B07B2189819A500E99727 /* LensAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensAuthor.m; sourceTree = "<group>"; };
+		C37B07C318982CE700E99727 /* LensAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensAsset.h; sourceTree = "<group>"; };
+		C37B07C418982CE700E99727 /* LensAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensAsset.m; sourceTree = "<group>"; };
+		C3ACEBC71893036D0052E182 /* LensApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LensApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3ACEBCA1893036D0052E182 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C3ACEBCC1893036D0052E182 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C3ACEBCE1893036D0052E182 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C3ACEBD01893036D0052E182 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C3ACEBD41893036D0052E182 /* LensApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LensApp-Info.plist"; sourceTree = "<group>"; };
+		C3ACEBD61893036D0052E182 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C3ACEBD81893036D0052E182 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C3ACEBDA1893036D0052E182 /* LensApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LensApp-Prefix.pch"; sourceTree = "<group>"; };
+		C3ACEBDB1893036D0052E182 /* LensAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LensAppDelegate.h; sourceTree = "<group>"; };
+		C3ACEBDC1893036D0052E182 /* LensAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LensAppDelegate.m; sourceTree = "<group>"; };
+		C3ACEBDF1893036D0052E182 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		C3ACEBE21893036D0052E182 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		C3ACEBE51893036D0052E182 /* LensApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LensApp.xcdatamodel; sourceTree = "<group>"; };
+		C3ACEBE71893036D0052E182 /* LensMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LensMasterViewController.h; sourceTree = "<group>"; };
+		C3ACEBE81893036D0052E182 /* LensMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LensMasterViewController.m; sourceTree = "<group>"; };
+		C3ACEBEA1893036D0052E182 /* LensDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LensDetailViewController.h; sourceTree = "<group>"; };
+		C3ACEBEB1893036D0052E182 /* LensDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LensDetailViewController.m; sourceTree = "<group>"; };
+		C3ACEBED1893036D0052E182 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C3ACEBF31893036E0052E182 /* LensAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LensAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3ACEBF41893036E0052E182 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C3ACEBFD1893036E0052E182 /* LensAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LensAppTests-Info.plist"; sourceTree = "<group>"; };
+		C3ACEBFF1893036E0052E182 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C3ACEC011893036E0052E182 /* LensAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LensAppTests.m; sourceTree = "<group>"; };
+		E2DE5F6974B74BEF99CFB478 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C3ACEBC41893036D0052E182 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3ACEBCD1893036D0052E182 /* CoreGraphics.framework in Frameworks */,
+				C3ACEBD11893036D0052E182 /* CoreData.framework in Frameworks */,
+				C3ACEBCF1893036D0052E182 /* UIKit.framework in Frameworks */,
+				C3ACEBCB1893036D0052E182 /* Foundation.framework in Frameworks */,
+				B538BB5316864AF98F063ED1 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3ACEBF01893036E0052E182 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3ACEBF51893036E0052E182 /* XCTest.framework in Frameworks */,
+				C3ACEBF81893036E0052E182 /* CoreData.framework in Frameworks */,
+				C3ACEBF71893036E0052E182 /* UIKit.framework in Frameworks */,
+				C3ACEBF61893036E0052E182 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C37B07BA18982B9E00E99727 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C3ACEBE41893036D0052E182 /* LensApp.xcdatamodeld */,
+				C37B07C318982CE700E99727 /* LensAsset.h */,
+				C37B07C418982CE700E99727 /* LensAsset.m */,
+				C37B07AB189814D400E99727 /* LensPost.h */,
+				C37B07AC189814D400E99727 /* LensPost.m */,
+				C37B07AE189816A000E99727 /* LensStory.h */,
+				C37B07AF189816A000E99727 /* LensStory.m */,
+				C37B07B1189819A500E99727 /* LensAuthor.h */,
+				C37B07B2189819A500E99727 /* LensAuthor.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C37B07BB18982BB100E99727 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C37B07A8189808C300E99727 /* LensNetworkController.h */,
+				C37B07A9189808C300E99727 /* LensNetworkController.m */,
+				C3ACEBE71893036D0052E182 /* LensMasterViewController.h */,
+				C3ACEBE81893036D0052E182 /* LensMasterViewController.m */,
+				C3ACEBEA1893036D0052E182 /* LensDetailViewController.h */,
+				C3ACEBEB1893036D0052E182 /* LensDetailViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C37B07BC18982BCE00E99727 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C3ACEBDE1893036D0052E182 /* Main_iPhone.storyboard */,
+				C3ACEBE11893036D0052E182 /* Main_iPad.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		C3ACEBBE1893036D0052E182 = {
+			isa = PBXGroup;
+			children = (
+				C3ACEBD21893036D0052E182 /* LensApp */,
+				C3ACEBFB1893036E0052E182 /* LensAppTests */,
+				C3ACEBC91893036D0052E182 /* Frameworks */,
+				C3ACEBC81893036D0052E182 /* Products */,
+				5D88A05A68EE4C4FAF04D141 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		C3ACEBC81893036D0052E182 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3ACEBC71893036D0052E182 /* LensApp.app */,
+				C3ACEBF31893036E0052E182 /* LensAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C3ACEBC91893036D0052E182 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3ACEBCA1893036D0052E182 /* Foundation.framework */,
+				C3ACEBCC1893036D0052E182 /* CoreGraphics.framework */,
+				C3ACEBCE1893036D0052E182 /* UIKit.framework */,
+				C3ACEBD01893036D0052E182 /* CoreData.framework */,
+				C3ACEBF41893036E0052E182 /* XCTest.framework */,
+				E2DE5F6974B74BEF99CFB478 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C3ACEBD21893036D0052E182 /* LensApp */ = {
+			isa = PBXGroup;
+			children = (
+				C37B07BC18982BCE00E99727 /* Views */,
+				C37B07BB18982BB100E99727 /* Controllers */,
+				C37B07BA18982B9E00E99727 /* Models */,
+				C3ACEBDB1893036D0052E182 /* LensAppDelegate.h */,
+				C3ACEBDC1893036D0052E182 /* LensAppDelegate.m */,
+				C3ACEBED1893036D0052E182 /* Images.xcassets */,
+				C3ACEBD31893036D0052E182 /* Supporting Files */,
+			);
+			path = LensApp;
+			sourceTree = "<group>";
+		};
+		C3ACEBD31893036D0052E182 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C3ACEBD41893036D0052E182 /* LensApp-Info.plist */,
+				C3ACEBD51893036D0052E182 /* InfoPlist.strings */,
+				C3ACEBD81893036D0052E182 /* main.m */,
+				C3ACEBDA1893036D0052E182 /* LensApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C3ACEBFB1893036E0052E182 /* LensAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				C3ACEC011893036E0052E182 /* LensAppTests.m */,
+				C3ACEBFC1893036E0052E182 /* Supporting Files */,
+			);
+			path = LensAppTests;
+			sourceTree = "<group>";
+		};
+		C3ACEBFC1893036E0052E182 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C3ACEBFD1893036E0052E182 /* LensAppTests-Info.plist */,
+				C3ACEBFE1893036E0052E182 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C3ACEBC61893036D0052E182 /* LensApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3ACEC051893036E0052E182 /* Build configuration list for PBXNativeTarget "LensApp" */;
+			buildPhases = (
+				911B04E55A30497789C367DC /* Check Pods Manifest.lock */,
+				C3ACEBC31893036D0052E182 /* Sources */,
+				C3ACEBC41893036D0052E182 /* Frameworks */,
+				C3ACEBC51893036D0052E182 /* Resources */,
+				33B06DD0979148EB8E7C0407 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LensApp;
+			productName = LensApp;
+			productReference = C3ACEBC71893036D0052E182 /* LensApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C3ACEBF21893036E0052E182 /* LensAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3ACEC081893036E0052E182 /* Build configuration list for PBXNativeTarget "LensAppTests" */;
+			buildPhases = (
+				C3ACEBEF1893036E0052E182 /* Sources */,
+				C3ACEBF01893036E0052E182 /* Frameworks */,
+				C3ACEBF11893036E0052E182 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C3ACEBFA1893036E0052E182 /* PBXTargetDependency */,
+			);
+			name = LensAppTests;
+			productName = LensAppTests;
+			productReference = C3ACEBF31893036E0052E182 /* LensAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C3ACEBBF1893036D0052E182 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Lens;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = GeoffMacDonald;
+				TargetAttributes = {
+					C3ACEBF21893036E0052E182 = {
+						TestTargetID = C3ACEBC61893036D0052E182;
+					};
+				};
+			};
+			buildConfigurationList = C3ACEBC21893036D0052E182 /* Build configuration list for PBXProject "LensApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C3ACEBBE1893036D0052E182;
+			productRefGroup = C3ACEBC81893036D0052E182 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C3ACEBC61893036D0052E182 /* LensApp */,
+				C3ACEBF21893036E0052E182 /* LensAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C3ACEBC51893036D0052E182 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3ACEBE31893036D0052E182 /* Main_iPad.storyboard in Resources */,
+				C3ACEBEE1893036D0052E182 /* Images.xcassets in Resources */,
+				C3ACEBE01893036D0052E182 /* Main_iPhone.storyboard in Resources */,
+				C3ACEBD71893036D0052E182 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3ACEBF11893036E0052E182 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3ACEC001893036E0052E182 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33B06DD0979148EB8E7C0407 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		911B04E55A30497789C367DC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C3ACEBC31893036D0052E182 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C37B07AD189814D400E99727 /* LensPost.m in Sources */,
+				C37B07B0189816A000E99727 /* LensStory.m in Sources */,
+				C37B07B3189819A500E99727 /* LensAuthor.m in Sources */,
+				C3ACEBDD1893036D0052E182 /* LensAppDelegate.m in Sources */,
+				C3ACEBEC1893036D0052E182 /* LensDetailViewController.m in Sources */,
+				C3ACEBE61893036D0052E182 /* LensApp.xcdatamodeld in Sources */,
+				C3ACEBE91893036D0052E182 /* LensMasterViewController.m in Sources */,
+				C37B07AA189808C300E99727 /* LensNetworkController.m in Sources */,
+				C37B07C518982CE700E99727 /* LensAsset.m in Sources */,
+				C3ACEBD91893036D0052E182 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3ACEBEF1893036E0052E182 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3ACEC021893036E0052E182 /* LensAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C3ACEBFA1893036E0052E182 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C3ACEBC61893036D0052E182 /* LensApp */;
+			targetProxy = C3ACEBF91893036E0052E182 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C3ACEBD51893036D0052E182 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3ACEBD61893036D0052E182 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C3ACEBDE1893036D0052E182 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3ACEBDF1893036D0052E182 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		C3ACEBE11893036D0052E182 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3ACEBE21893036D0052E182 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		C3ACEBFE1893036E0052E182 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3ACEBFF1893036E0052E182 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C3ACEC031893036E0052E182 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C3ACEC041893036E0052E182 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C3ACEC061893036E0052E182 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D88A05A68EE4C4FAF04D141 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LensApp/LensApp-Prefix.pch";
+				INFOPLIST_FILE = "LensApp/LensApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C3ACEC071893036E0052E182 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D88A05A68EE4C4FAF04D141 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LensApp/LensApp-Prefix.pch";
+				INFOPLIST_FILE = "LensApp/LensApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C3ACEC091893036E0052E182 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LensApp.app/LensApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LensApp/LensApp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LensAppTests/LensAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C3ACEC0A1893036E0052E182 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LensApp.app/LensApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LensApp/LensApp-Prefix.pch";
+				INFOPLIST_FILE = "LensAppTests/LensAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C3ACEBC21893036D0052E182 /* Build configuration list for PBXProject "LensApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3ACEC031893036E0052E182 /* Debug */,
+				C3ACEC041893036E0052E182 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3ACEC051893036E0052E182 /* Build configuration list for PBXNativeTarget "LensApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3ACEC061893036E0052E182 /* Debug */,
+				C3ACEC071893036E0052E182 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3ACEC081893036E0052E182 /* Build configuration list for PBXNativeTarget "LensAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3ACEC091893036E0052E182 /* Debug */,
+				C3ACEC0A1893036E0052E182 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C3ACEBE41893036D0052E182 /* LensApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C3ACEBE51893036D0052E182 /* LensApp.xcdatamodel */,
+			);
+			currentVersion = C3ACEBE51893036D0052E182 /* LensApp.xcdatamodel */;
+			path = LensApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C3ACEBBF1893036D0052E182 /* Project object */;
+}
