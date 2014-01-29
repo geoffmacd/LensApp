@@ -13,6 +13,8 @@
 #import "LensStory.h"
 #import "LensAsset.h"
 
+#define AssetDataUrl        @"http://lens.blogs.nytimes.com/asset-data/"
+
 @protocol LensNetworkDelegate <NSObject>
 
 @end
@@ -20,6 +22,7 @@
 
 @interface LensNetworkController : NSObject <NSXMLParserDelegate>
 
+@property NSOperationQueue * queue;
 
 
 -(instancetype)init;

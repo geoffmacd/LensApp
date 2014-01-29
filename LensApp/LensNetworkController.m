@@ -8,7 +8,9 @@
 
 #import "LensNetworkController.h"
 
-#define AssetDataUrl        @"http://lens.blogs.nytimes.com/asset-data/"
+#import "LensAssetDataParse.h"
+#import "LensAppDelegate.h"
+
 
 @implementation LensNetworkController
 
@@ -28,7 +30,7 @@
     if(self = [super init]){
         
         //config
-        
+        _queue = [[NSOperationQueue alloc] init];
     }
     return self;
 }
@@ -46,12 +48,12 @@
         //save relevant info to database
         
         if(!error){
+            LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+            NSManagedObjectContext * newContext = [appDel threadContext];
             
-            
-            NSXMLParser *xml = [[NSXMLParser alloc] initWithData:data];
-            [xml setDelegate:self];
-            BOOL success = [xml parse];
-            NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            //parse xml
+            LensAssetDataParse * parser = [[LensAssetDataParse alloc] initWithData:data andContext:newContext];
+            [_queue addOperation:parser];
         }
     }];
     //must start

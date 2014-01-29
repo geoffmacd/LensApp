@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B538BB5316864AF98F063ED1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2DE5F6974B74BEF99CFB478 /* libPods.a */; };
+		C36A3BD21899A119002B900E /* LensAssetDataParse.m in Sources */ = {isa = PBXBuildFile; fileRef = C36A3BD11899A119002B900E /* LensAssetDataParse.m */; };
+		C36A3BD71899AE12002B900E /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = C36A3BD41899AE12002B900E /* GTMNSString+HTML.m */; };
+		C36A3BD81899AE12002B900E /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = C36A3BD61899AE12002B900E /* NSString+HTML.m */; };
 		C37B07AA189808C300E99727 /* LensNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07A9189808C300E99727 /* LensNetworkController.m */; };
 		C37B07AD189814D400E99727 /* LensPost.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07AC189814D400E99727 /* LensPost.m */; };
 		C37B07B0189816A000E99727 /* LensStory.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07AF189816A000E99727 /* LensStory.m */; };
@@ -46,6 +49,12 @@
 
 /* Begin PBXFileReference section */
 		5D88A05A68EE4C4FAF04D141 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C36A3BD01899A119002B900E /* LensAssetDataParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensAssetDataParse.h; sourceTree = "<group>"; };
+		C36A3BD11899A119002B900E /* LensAssetDataParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensAssetDataParse.m; sourceTree = "<group>"; };
+		C36A3BD31899AE12002B900E /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		C36A3BD41899AE12002B900E /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		C36A3BD51899AE12002B900E /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		C36A3BD61899AE12002B900E /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		C37B07A8189808C300E99727 /* LensNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensNetworkController.h; sourceTree = "<group>"; };
 		C37B07A9189808C300E99727 /* LensNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensNetworkController.m; sourceTree = "<group>"; };
 		C37B07AB189814D400E99727 /* LensPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensPost.h; sourceTree = "<group>"; };
@@ -110,6 +119,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C36A3BC918999D5C002B900E /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C36A3BD31899AE12002B900E /* GTMNSString+HTML.h */,
+				C36A3BD41899AE12002B900E /* GTMNSString+HTML.m */,
+				C36A3BD51899AE12002B900E /* NSString+HTML.h */,
+				C36A3BD61899AE12002B900E /* NSString+HTML.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		C37B07BA18982B9E00E99727 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +155,8 @@
 				C3ACEBE81893036D0052E182 /* LensMasterViewController.m */,
 				C3ACEBEA1893036D0052E182 /* LensDetailViewController.h */,
 				C3ACEBEB1893036D0052E182 /* LensDetailViewController.m */,
+				C36A3BD01899A119002B900E /* LensAssetDataParse.h */,
+				C36A3BD11899A119002B900E /* LensAssetDataParse.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -184,6 +206,7 @@
 		C3ACEBD21893036D0052E182 /* LensApp */ = {
 			isa = PBXGroup;
 			children = (
+				C36A3BC918999D5C002B900E /* Categories */,
 				C37B07BC18982BCE00E99727 /* Views */,
 				C37B07BB18982BB100E99727 /* Controllers */,
 				C37B07BA18982B9E00E99727 /* Models */,
@@ -360,8 +383,11 @@
 			files = (
 				C37B07AD189814D400E99727 /* LensPost.m in Sources */,
 				C37B07B0189816A000E99727 /* LensStory.m in Sources */,
+				C36A3BD21899A119002B900E /* LensAssetDataParse.m in Sources */,
 				C37B07B3189819A500E99727 /* LensAuthor.m in Sources */,
 				C3ACEBDD1893036D0052E182 /* LensAppDelegate.m in Sources */,
+				C36A3BD81899AE12002B900E /* NSString+HTML.m in Sources */,
+				C36A3BD71899AE12002B900E /* GTMNSString+HTML.m in Sources */,
 				C3ACEBEC1893036D0052E182 /* LensDetailViewController.m in Sources */,
 				C3ACEBE61893036D0052E182 /* LensApp.xcdatamodeld in Sources */,
 				C3ACEBE91893036D0052E182 /* LensMasterViewController.m in Sources */,

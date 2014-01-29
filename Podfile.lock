@@ -1,10 +1,13 @@
 PODS:
   - Reachability (3.0.0)
+  - SMXMLDocument (1.0.1)
 
 DEPENDENCIES:
   - Reachability (~> 3.0.0)
+  - SMXMLDocument
 
 SPEC CHECKSUMS:
   Reachability: 500bd76bf6cd8ff2c6fb715fc5f44ef6e4c024f2
+  SMXMLDocument: ad233e93dd51c7f8929209b8f9db72becf817ae1
 
 COCOAPODS: 0.24.0
