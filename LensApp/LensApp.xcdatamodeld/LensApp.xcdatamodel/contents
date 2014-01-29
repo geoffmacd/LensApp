@@ -31,7 +31,7 @@
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="story" inverseEntity="Post" syncable="YES"/>
         <userInfo/>
     </entity>
-    <entity name="Tags" syncable="YES">
+    <entity name="Tags" representedClassName="LensTag" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="posts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="tags" inverseEntity="Post" syncable="YES"/>
     </entity>

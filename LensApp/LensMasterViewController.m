@@ -38,6 +38,15 @@
     
     LensNetworkController * net = [LensNetworkController sharedNetwork];
     [net getCurrentPosts];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contextWasSaved:)
+                                                 name:NSManagedObjectContextDidSaveNotification object:nil];
+}
+
+-(void)contextWasSaved:(NSNotification*)notification{
+    
+    [self.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:NO];
 }
 
 - (void)didReceiveMemoryWarning

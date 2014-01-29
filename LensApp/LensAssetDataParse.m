@@ -38,19 +38,49 @@
      It's also possible to have NSXMLParser download the data, by passing it a URL, but this is not desirable because it gives less control over the network, particularly in responding to connection errors.
      */
     
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:[_xmlString dataUsingEncoding:NSUTF8StringEncoding]];
-    [parser setDelegate:self];
-    [parser setShouldProcessNamespaces:YES];
-    BOOL success = [parser parse];
+    NSData * data = [_xmlString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // create a new SMXMLDocument with the contents of sample.xml
+    NSError *error = nil;
+    SMXMLDocument *document = [SMXMLDocument documentWithData:data error:&error];
+    
+    if(error){
+        NSLog([error description]);
+        return;
+    }
+    
+    SMXMLElement *posts = [document.root childNamed:@"posts"];
+    
+    NSMutableArray * newPosts = [NSMutableArray new];
+    
+    for (SMXMLElement *post in [posts childrenNamed:@"post"]) {
+        
+        LensPost * newPost = [self newPost];
+        
+//        newPost.byline = [post valueWithPath:kTagByline];
+        newPost.title = [post valueWithPath:kTagTitle];
+        newPost.date = [NSDate date];
+//        NSString *keywords = [post valueWithPath:kTagKeyword];
+//        NSString *tags = [post valueWithPath:kTagTags];
+//        newPost.tags = [tags componentsSeparatedByString:@","];
+        newPost.storyUrl = [post valueWithPath:kTagURL];
+        newPost.assetUrl = [post valueWithPath:kTagAsset];
+        newPost.iconUrl = [[post childNamed:kTagPhoto] valueWithPath:kTagURL];
+        
+        [newPosts addObject:newPost];
+        
+    }
     
     //save to context
-    NSError *error = nil;
-    if (success && _context != nil) {
-        if ([_context hasChanges] && ![_context save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+    if (_context != nil) {
+        if ([_context hasChanges]){
+            if(![_context save:&error]) {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                abort();
+        
+            }
         }
     }
 }
@@ -61,33 +91,16 @@
     return newPost;
 }
 
-
-#pragma mark - NSXMLParser delegate methods
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+- (LensPost*)newStory{
     
-    /*
-     If the number of parsed earthquakes is greater than kMaximumNumberOfEarthquakesToParse, abort the parse.
-     */
-    if ([elementName isEqualToString:kTagPost]) {
-        LensPost * post = [self newPost];
-        _curPost = post;
-    }
-    NSLog([attributeDict description]);
+    LensPost * newPost = [NSEntityDescription insertNewObjectForEntityForName:@"Story" inManagedObjectContext:_context];
+    return newPost;
 }
 
--(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
+- (LensPost*)newAssets{
     
-
-}
-
-
--(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
-    
-}
-
--(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError{
-    NSLog([parseError description]);
+    LensPost * newPost = [NSEntityDescription insertNewObjectForEntityForName:@"Asset" inManagedObjectContext:_context];
+    return newPost;
 }
 
 @end

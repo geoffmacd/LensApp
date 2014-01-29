@@ -1,5 +1,5 @@
 //
-//  LensStory.h
+//  LensTag.h
 //  LensApp
 //
 //  Created by Xtreme Dev on 1/29/2014.
@@ -8,13 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "LensPost.h"
 
 @class LensPost;
 
-@interface LensStory : LensPost
+@interface LensTag : NSManagedObject
 
-@property (nonatomic, retain) NSString * htmlContent;
-@property (nonatomic, retain) LensPost *post;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) LensPost *posts;
 
 @end
