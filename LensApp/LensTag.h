@@ -2,7 +2,7 @@
 //  LensTag.h
 //  LensApp
 //
-//  Created by Xtreme Dev on 1/29/2014.
+//  Created by Xtreme Dev on 1/30/2014.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
@@ -14,6 +14,14 @@
 @interface LensTag : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) LensPost *posts;
+@property (nonatomic, retain) NSSet *posts;
+@end
+
+@interface LensTag (CoreDataGeneratedAccessors)
+
+- (void)addPostsObject:(LensPost *)value;
+- (void)removePostsObject:(LensPost *)value;
+- (void)addPosts:(NSSet *)values;
+- (void)removePosts:(NSSet *)values;
 
 @end

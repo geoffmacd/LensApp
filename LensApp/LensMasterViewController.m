@@ -26,6 +26,12 @@
     [super awakeFromNib];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    //retrieve current posts
+    [[LensNetworkController sharedNetwork] getCurrentPosts];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -36,9 +42,7 @@
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (LensDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
-    LensNetworkController * net = [LensNetworkController sharedNetwork];
-    [net getCurrentPosts];
-    
+    //observe persistence changes
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(contextWasSaved:)
                                                  name:NSManagedObjectContextDidSaveNotification object:nil];
@@ -46,7 +50,13 @@
 
 -(void)contextWasSaved:(NSNotification*)notification{
     
+    //merge
     [self.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:NO];
+    
+    NSError * error = nil;
+    
+    NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Post"];
+    NSArray * posts = [self.managedObjectContext executeFetchRequest:req error:&error];
 }
 
 - (void)didReceiveMemoryWarning

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="13B42" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Asset" representedClassName="LensAsset" parentEntity="Post" syncable="YES">
+    <entity name="Asset" representedClassName="LensAsset" syncable="YES">
         <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="credit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
@@ -11,7 +11,7 @@
     </entity>
     <entity name="Author" representedClassName="LensAuthor" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Post" inverseName="author" inverseEntity="Post" syncable="YES"/>
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="author" inverseEntity="Post" syncable="YES"/>
     </entity>
     <entity name="Post" representedClassName="LensPost" syncable="YES">
         <attribute name="assetUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -26,14 +26,14 @@
         <relationship name="story" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Story" inverseName="post" inverseEntity="Story" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Tags" inverseName="posts" inverseEntity="Tags" syncable="YES"/>
     </entity>
-    <entity name="Story" representedClassName="LensStory" parentEntity="Post">
+    <entity name="Story" representedClassName="LensStory">
         <attribute name="htmlContent" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="story" inverseEntity="Post" syncable="YES"/>
         <userInfo/>
     </entity>
     <entity name="Tags" representedClassName="LensTag" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="posts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="tags" inverseEntity="Post" syncable="YES"/>
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="tags" inverseEntity="Post" syncable="YES"/>
     </entity>
     <elements>
         <element name="Asset" positionX="0" positionY="0" width="0" height="0"/>

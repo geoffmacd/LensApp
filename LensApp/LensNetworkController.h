@@ -15,14 +15,11 @@
 
 #define AssetDataUrl        @"http://lens.blogs.nytimes.com/asset-data/"
 
-@protocol LensNetworkDelegate <NSObject>
 
-@end
-
-
-@interface LensNetworkController : NSObject <NSXMLParserDelegate>
+@interface LensNetworkController : NSObject
 
 @property NSOperationQueue * queue;
+@property NSURLSession * session;
 
 
 -(instancetype)init;
@@ -36,12 +33,11 @@
 +(LensNetworkController*)sharedNetwork;
 
 /**
- * returns current posts as call from /assetdata would
+ * retrieves all current posts with call from /asset-data
  * @author Geoff MacDonald
  *
- * @return NSArray of LensPost
  */
--(NSArray*)getCurrentPosts;
+-(void)getCurrentPosts;
 
 /**
  * returns posts of a particular time period by extrapolating dates and returning correct html content
@@ -69,7 +65,7 @@
  * @param LensPost to get assets for
  * @return LensAssets
  */
--(NSArray*)getAssetsForPost:(LensPost*)post;
+-(void)getAssetsForPost:(LensPost*)post;
 
 /**
  * requests icon for post

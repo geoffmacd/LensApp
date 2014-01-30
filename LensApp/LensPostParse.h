@@ -8,7 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+#import "LensRequest.h"
 #import "LensPost.h"
+
+#define     kTagData            @"data"
+#define     kTagPosts           @"posts"
+#define     kTagPost            @"post"
+#define     kTagTitle           @"title"
+#define     kTagByline          @"byline"
+#define     kTagDate            @"date"
+#define     kTagKeyword         @"keywords"
+#define     kTagTags            @"tags"
+#define     kTagExcerpt         @"excerpt"
+#define     kTagURL             @"url"
+#define     kTagPhoto           @"photo"
+#define     kTagAsset           @"asset"
 
 /*
 <data>
@@ -28,29 +42,12 @@
  </post>
  */
 
-#define     kTagData            @"data"
-#define     kTagPosts           @"posts"
-#define     kTagPost            @"post"
-#define     kTagTitle           @"title"
-#define     kTagByline          @"byline"
-#define     kTagDate            @"date"
-#define     kTagKeyword         @"keywords"
-#define     kTagTags            @"tags"
-#define     kTagExcerpt         @"excerpt"
-#define     kTagURL             @"url"
-#define     kTagPhoto           @"photo"
-#define     kTagAsset           @"asset"
 
-@interface LensAssetDataParse : NSOperation <NSXMLParserDelegate,NSFetchedResultsControllerDelegate>
+@interface LensPostParse : LensRequest
 
-@property (copy) NSString * xmlString;
-
-@property LensPost * curPost;
 @property NSMutableArray * postArray;
 
-@property NSManagedObjectContext * context;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
-- (instancetype)initWithData:(NSData *)parseData andContext:(NSManagedObjectContext*)context;
+- (instancetype)initWithData:(NSData *)parseData;
 
 @end

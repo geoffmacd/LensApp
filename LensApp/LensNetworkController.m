@@ -8,8 +8,8 @@
 
 #import "LensNetworkController.h"
 
-#import "LensAssetDataParse.h"
-#import "LensAppDelegate.h"
+#import "LensPostParse.h"
+#import "LensAssetsParse.h"
 
 
 @implementation LensNetworkController
@@ -31,35 +31,39 @@
         
         //config
         _queue = [[NSOperationQueue alloc] init];
+        _session = [NSURLSession sharedSession];
+        
+        //observe persistence changes
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(contextWasSaved:)
+                                                     name:NSManagedObjectContextDidSaveNotification object:nil];
     }
     return self;
 }
 
--(NSArray *)getCurrentPosts{
+-(void)contextWasSaved:(NSNotification*)notification{
     
-    NSURL * assetDataUrl = [NSURL URLWithString:AssetDataUrl];
+    //1. launch requests for stories, assets, icons depending on state of LensPost and prioritize based on
+    //2. notifies controllers that 
+}
+
+-(void)getCurrentPosts{
     
-    NSURLRequest * req = [[NSURLRequest alloc] initWithURL:assetDataUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    
-    NSURLSession * ses = [NSURLSession sharedSession];
-    NSURLSessionDataTask * task = [ses dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURL * postsUrl = [NSURL URLWithString:AssetDataUrl];
+    NSURLRequest * req = [[NSURLRequest alloc] initWithURL:postsUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLSessionDataTask * task = [_session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         //on completion
         //save relevant info to database
         
         if(!error){
-            LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
-            NSManagedObjectContext * newContext = [appDel threadContext];
-            
             //parse xml
-            LensAssetDataParse * parser = [[LensAssetDataParse alloc] initWithData:data andContext:newContext];
+            LensPostParse * parser = [[LensPostParse alloc] initWithData:data];
             [_queue addOperation:parser];
         }
     }];
     //must start
     [task resume];
-
-    return nil;
 }
 
 -(NSArray *)getArchivePosts:(NSDate *)startDate withEnd:(NSDate *)endDate{
@@ -72,9 +76,23 @@
     return nil;
 }
 
--(NSArray *)getAssetsForPost:(LensPost *)post{
+-(void)getAssetsForPost:(LensPost *)post{
     
-    return nil;
+    NSURL * assetDataUrl = [NSURL URLWithString:post.assetUrl];
+    NSURLRequest * req = [[NSURLRequest alloc] initWithURL:assetDataUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLSessionDataTask * task = [_session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        //on completion
+        //save relevant info to database
+        
+        if(!error){
+            //parse xml
+            LensAssetsParse * parser = [[LensAssetsParse alloc] initWithData:data forPostObjectId:[post objectID]];
+            [_queue addOperation:parser];
+        }
+    }];
+    //must start
+    [task resume];
 }
 
 -(UIImage *)getIconForPost:(LensPost *)post{
@@ -83,14 +101,8 @@
 }
 
 
-#pragma mark - NSXMLParserDelegate
 
--(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError{
-    
-}
 
--(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
 
-}
 
 @end
