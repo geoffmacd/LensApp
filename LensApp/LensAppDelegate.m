@@ -96,12 +96,11 @@
 
 // Returns new managed object context
 - (NSManagedObjectContext *)threadContext{
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-    return _managedObjectContext;
+
+    NSManagedObjectContext * threadContext = [[NSManagedObjectContext alloc] init];
+    [threadContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+    
+    return threadContext;
 }
 
 // Returns the managed object model for the application.

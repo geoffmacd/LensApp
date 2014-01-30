@@ -16,8 +16,9 @@
 @dynamic credit;
 @dynamic height;
 @dynamic imageUrl;
-@dynamic localUrl;
+@dynamic filename;
 @dynamic width;
+@dynamic extension;
 @dynamic post;
 
 @end

@@ -2,14 +2,14 @@
 //  LensPost.h
 //  LensApp
 //
-//  Created by Xtreme Dev on 1/29/2014.
+//  Created by Xtreme Dev on 1/30/2014.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class LensAsset, LensAuthor, LensStory;
+@class LensAsset, LensAuthor, LensStory, LensTag;
 
 @interface LensPost : NSManagedObject
 
@@ -38,14 +38,14 @@
 - (void)removeAssetsObject:(LensAsset *)value;
 - (void)addAssets:(NSOrderedSet *)values;
 - (void)removeAssets:(NSOrderedSet *)values;
-- (void)insertObject:(NSManagedObject *)value inTagsAtIndex:(NSUInteger)idx;
+- (void)insertObject:(LensTag *)value inTagsAtIndex:(NSUInteger)idx;
 - (void)removeObjectFromTagsAtIndex:(NSUInteger)idx;
 - (void)insertTags:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
 - (void)removeTagsAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInTagsAtIndex:(NSUInteger)idx withObject:(NSManagedObject *)value;
+- (void)replaceObjectInTagsAtIndex:(NSUInteger)idx withObject:(LensTag *)value;
 - (void)replaceTagsAtIndexes:(NSIndexSet *)indexes withTags:(NSArray *)values;
-- (void)addTagsObject:(NSManagedObject *)value;
-- (void)removeTagsObject:(NSManagedObject *)value;
+- (void)addTagsObject:(LensTag *)value;
+- (void)removeTagsObject:(LensTag *)value;
 - (void)addTags:(NSOrderedSet *)values;
 - (void)removeTags:(NSOrderedSet *)values;
 @end

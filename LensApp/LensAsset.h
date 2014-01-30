@@ -17,8 +17,9 @@
 @property (nonatomic, retain) NSString * credit;
 @property (nonatomic) float height;
 @property (nonatomic, retain) NSString * imageUrl;
-@property (nonatomic, retain) NSString * localUrl;
+@property (nonatomic, retain) NSString * filename;
 @property (nonatomic) float width;
+@property (nonatomic, retain) NSString * extension;
 @property (nonatomic, retain) LensPost *post;
 
 @end

@@ -10,6 +10,8 @@
 
 #import "LensPostParse.h"
 #import "LensAssetsParse.h"
+#import "LensImage.h"
+#import "LensAppDelegate.h"
 
 
 @implementation LensNetworkController
@@ -76,9 +78,13 @@
     return nil;
 }
 
--(void)getAssetsForPost:(LensPost *)post{
+-(void)getAssetsForPost:(NSManagedObjectID *)postId{
     
-    NSURL * assetDataUrl = [NSURL URLWithString:post.assetUrl];
+    LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext * newContext = [appDel threadContext];
+    LensPost * curPost = (LensPost *)[newContext objectWithID:postId];
+    
+    NSURL * assetDataUrl = [NSURL URLWithString:curPost.assetUrl];
     NSURLRequest * req = [[NSURLRequest alloc] initWithURL:assetDataUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     NSURLSessionDataTask * task = [_session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
@@ -87,7 +93,7 @@
         
         if(!error){
             //parse xml
-            LensAssetsParse * parser = [[LensAssetsParse alloc] initWithData:data forPostObjectId:[post objectID]];
+            LensAssetsParse * parser = [[LensAssetsParse alloc] initWithData:data forPostObjectId:postId];
             [_queue addOperation:parser];
         }
     }];
@@ -95,9 +101,34 @@
     [task resume];
 }
 
--(UIImage *)getIconForPost:(LensPost *)post{
+
+-(void)getImageForAsset:(NSManagedObjectID*)assetId{
     
-    return nil;
+    NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^{
+        
+        LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+        NSManagedObjectContext * newContext = [appDel threadContext];
+        LensAsset * curAsset = (LensAsset *)[newContext objectWithID:assetId];
+        
+        NSString * url = [curAsset imageUrl];
+        UIImage * image = [LensImage getImageFromURL:url];
+        NSString * type = [url pathExtension];
+        NSString * filename = [[url stringByDeletingPathExtension] lastPathComponent];
+        
+        [LensImage saveImage:image withFileName:filename ofType:type];
+        
+        
+        curAsset.filename = filename;
+        curAsset.extension = type;
+        
+        NSError * err;
+        [newContext save:&err];
+    }];
+    [_queue addOperation:op];
+}
+
+-(void)getIconForPost:(LensPost *)post{
+    
 }
 
 

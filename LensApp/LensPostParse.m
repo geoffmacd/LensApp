@@ -24,7 +24,7 @@
 
 // The main function for this NSOperation, to start the parsing.
 - (void)main {
-    
+   
     //decode to string
     NSData * data = [self.xmlString dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -43,19 +43,33 @@
     
     for (SMXMLElement *post in [posts childrenNamed:@"post"]) {
         
-        LensPost * newPost = [self newPost];
+        NSString * title = [post valueWithPath:kTagTitle];
         
-        newPost.title = [post valueWithPath:kTagTitle];
-        newPost.date = [NSDate date];
-//        newPost.byline = [post valueWithPath:kTagByline];
-//        NSString *keywords = [post valueWithPath:kTagKeyword];
-//        NSString *tags = [post valueWithPath:kTagTags];
-//        newPost.tags = [tags componentsSeparatedByString:@","];
-        newPost.storyUrl = [post valueWithPath:kTagURL];
-        newPost.assetUrl = [post valueWithPath:kTagAsset];
-        newPost.iconUrl = [[post childNamed:kTagPhoto] valueWithPath:kTagURL];
-        
-        [newPosts addObject:newPost];
+        //fetch posts with same title
+        NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Post"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", title];
+        [req setPredicate:predicate];
+    
+        error = nil;
+        NSArray * matches = [self.context executeFetchRequest:req error:&error];
+        if(error || ![matches count]){
+            
+            LensPost * newPost = [self newPost];
+            
+            newPost.title = title;
+            newPost.date = [NSDate date];
+            //        newPost.byline = [post valueWithPath:kTagByline];
+            //        NSString *keywords = [post valueWithPath:kTagKeyword];
+            //        NSString *tags = [post valueWithPath:kTagTags];
+            //        newPost.tags = [tags componentsSeparatedByString:@","];
+            newPost.storyUrl = [post valueWithPath:kTagURL];
+            newPost.assetUrl = [post valueWithPath:kTagAsset];
+            newPost.iconUrl = [[post childNamed:kTagPhoto] valueWithPath:kTagURL];
+            
+            [newPosts addObject:newPost];
+        } else {
+            NSLog(@"already have this post, %@", title);
+        }
     }
     
     //save to context
@@ -64,7 +78,7 @@
     //launch asset request on main thread to hit queue
     dispatch_async(dispatch_get_main_queue(), ^{
         for(LensPost * post in newPosts){
-            [[LensNetworkController sharedNetwork] getAssetsForPost:post];
+            [[LensNetworkController sharedNetwork] getAssetsForPost:post.objectID];
         }
     });
 }

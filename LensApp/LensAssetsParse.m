@@ -9,6 +9,7 @@
 #import "LensAssetsParse.h"
 
 #import <SMXMLDocument.h>
+#import "LensNetworkController.h"
 
 @implementation LensAssetsParse
 
@@ -40,26 +41,55 @@
     SMXMLElement * slides = [story childNamed:kTagPhotos];
     
     NSMutableArray * newAssets = [NSMutableArray new];
+    LensPost * post = (LensPost *)[self.context objectWithID:_postId];
     
-    for (SMXMLElement *slide in [slides childrenNamed:kTagSlide]) {
+    [[slides childrenNamed:kTagSlide] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        SMXMLElement *slide = (SMXMLElement*)obj;
         
         SMXMLElement *photo = [slide childNamed:kTagPhoto];
         
         //create new photo asset
         if(photo){
-            LensAsset * newAsset = [self newAsset];
             
-            newAsset.imageUrl = [photo valueWithPath:kTagUrl];
-            newAsset.caption = [photo valueWithPath:kTagCaption];
-            newAsset.credit = [photo valueWithPath:kTagCredit];
-            newAsset.post = [self.context objectWithID:_postId];
+            NSString * imageUrl = [photo valueWithPath:kTagUrl];
             
-            [newAssets addObject:newAsset];
+            //fetch posts with same title
+            NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Asset"];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"imageUrl == %@", imageUrl];
+            [req setPredicate:predicate];
+            
+            NSError*  error = nil;
+            NSArray * matches = [self.context executeFetchRequest:req error:&error];
+            if(error || ![matches count]){
+                
+                LensAsset * newAsset = [self newAsset];
+                
+                newAsset.imageUrl = imageUrl;
+                newAsset.caption = [photo valueWithPath:kTagCaption];
+                newAsset.credit = [photo valueWithPath:kTagCredit];
+                if(post){
+                    //add to post
+                    [newAssets addObject:newAsset];
+                    newAsset.post = post;
+                }
+                [post addAssetsObject:newAsset];
+            } else {
+                NSLog(@"already have this asset, %@", imageUrl);
+            }
         }
-    }
+    
+    }];
     
     //save to context
     [self saveContext];
+    
+    //launch asset request on main thread to hit queue
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for(LensAsset * asset in newAssets){
+            [[LensNetworkController sharedNetwork] getImageForAsset:asset.objectID];
+        }
+    });
 }
 
 - (LensAsset*)newAsset{

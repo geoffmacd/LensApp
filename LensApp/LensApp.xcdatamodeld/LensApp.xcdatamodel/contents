@@ -3,9 +3,10 @@
     <entity name="Asset" representedClassName="LensAsset" syncable="YES">
         <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="credit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="extension" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="localUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="width" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <relationship name="post" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="assets" inverseEntity="Post" syncable="YES"/>
     </entity>
@@ -26,10 +27,9 @@
         <relationship name="story" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Story" inverseName="post" inverseEntity="Story" syncable="YES"/>
         <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Tags" inverseName="posts" inverseEntity="Tags" syncable="YES"/>
     </entity>
-    <entity name="Story" representedClassName="LensStory">
+    <entity name="Story" representedClassName="LensStory" syncable="YES">
         <attribute name="htmlContent" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="post" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="story" inverseEntity="Post" syncable="YES"/>
-        <userInfo/>
     </entity>
     <entity name="Tags" representedClassName="LensTag" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>

@@ -10,6 +10,7 @@
 
 #import "LensDetailViewController.h"
 #import "LensNetworkController.h"
+#import "LensImage.h"
 
 @interface LensMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -46,6 +47,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(contextWasSaved:)
                                                  name:NSManagedObjectContextDidSaveNotification object:nil];
+    
+//    [[LensNetworkController sharedNetwork] getCurrentPosts];
 }
 
 -(void)contextWasSaved:(NSNotification*)notification{
@@ -53,10 +56,9 @@
     //merge
     [self.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:NO];
     
-    NSError * error = nil;
-    
-    NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Post"];
-    NSArray * posts = [self.managedObjectContext executeFetchRequest:req error:&error];
+//    NSError * error = nil;
+//    NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Post"];
+//    NSArray * posts = [self.managedObjectContext executeFetchRequest:req error:&error];
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,8 +139,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        self.detailViewController.detailItem = object;
+        LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        
+        LensAsset * asset = [post.assets firstObject];
+        
+        UIImage * image = [LensImage loadImage:asset.filename ofType:asset.extension];
+        self.detailViewController.detailItem = image;
     }
 }
 
@@ -146,8 +152,13 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setDetailItem:object];
+        LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        
+        LensAsset * asset = [post.assets firstObject];
+        
+        UIImage * image = [LensImage loadImage:asset.filename ofType:asset.extension];
+        
+        [[segue destinationViewController] setDetailItem:image];
     }
 }
 

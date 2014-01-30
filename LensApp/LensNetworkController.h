@@ -62,18 +62,24 @@
  * requests pictures for a post
  * @author Geoff MacDonald
  *
- * @param LensPost to get assets for
- * @return LensAssets
+ * @param NSManagedObjectID of post to get assets for
  */
--(void)getAssetsForPost:(LensPost*)post;
+-(void)getAssetsForPost:(NSManagedObjectID*)postId;
+
+/**
+ * requests image asset
+ * @author Geoff MacDonald
+ *
+ * @param LensPost to get icon for
+ */
+-(void)getImageForAsset:(NSManagedObjectID*)assetId;
 
 /**
  * requests icon for post
  * @author Geoff MacDonald
  *
  * @param LensPost to get icon for
- * @return LensIcon
  */
--(UIImage*)getIconForPost:(LensPost*)post;
+-(void)getIconForPost:(LensPost*)post;
 
 @end

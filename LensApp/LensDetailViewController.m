@@ -36,7 +36,8 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"date"] description];
+//        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"date"] description];
+        [self.imageView setImage:self.detailItem];
     }
 }
 
