@@ -52,19 +52,52 @@
     
         error = nil;
         NSArray * matches = [self.context executeFetchRequest:req error:&error];
-        if(error || ![matches count]){
+        if(!error && ![matches count]){
             
             LensPost * newPost = [self newPost];
             
             newPost.title = title;
-            newPost.date = [NSDate date];
-            //        newPost.byline = [post valueWithPath:kTagByline];
-            //        NSString *keywords = [post valueWithPath:kTagKeyword];
-            //        NSString *tags = [post valueWithPath:kTagTags];
-            //        newPost.tags = [tags componentsSeparatedByString:@","];
+            
+            NSString * dateStr = [post valueWithPath:kTagDate];
+            NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+            [formatter setLenient:YES];
+            [formatter setDateFormat:@"MMMM dd, yyyy, hh:mm a"];
+            NSDate * date = [formatter dateFromString:dateStr];
+            newPost.date = date;
+//            newPost.byline = [post valueWithPath:kTagByline];
+//            NSString *keywords = [post valueWithPath:kTagKeyword];
             newPost.storyUrl = [post valueWithPath:kTagURL];
             newPost.assetUrl = [post valueWithPath:kTagAsset];
+            newPost.excerpt = [post valueWithPath:kTagExcerpt];
             newPost.iconUrl = [[post childNamed:kTagPhoto] valueWithPath:kTagURL];
+            //process tags
+            NSString *tags = [post valueWithPath:kTagTags];
+            NSArray * tagArray = [tags componentsSeparatedByString:@","];
+            
+            [tagArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                
+                NSString * tagName = obj;
+                
+                NSFetchRequest * tagReq = [[NSFetchRequest alloc] initWithEntityName:@"Tags"];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", tagName];
+                [tagReq setPredicate:predicate];
+                
+                NSError * err = nil;
+                NSArray * tagMatch = [self.context executeFetchRequest:tagReq error:&err];
+                LensTag * curTag;
+                if(!err && ![tagMatch count]){
+                    
+                    curTag = [self newTag];
+                    curTag.name = tagName;
+                } else if ([tagMatch count]){
+                    curTag = [tagMatch firstObject];
+                }
+                //add tag to post and post to tag
+                if(curTag){
+                    [curTag addPostsObject: newPost];
+                    [newPost addTagsObject:curTag];
+                }
+            }];
             
             [newPosts addObject:newPost];
         } else {
@@ -87,6 +120,12 @@
     
     LensPost * newPost = [NSEntityDescription insertNewObjectForEntityForName:@"Post" inManagedObjectContext:self.context];
     return newPost;
+}
+
+- (LensTag*)newTag{
+    
+    LensTag * newtag = [NSEntityDescription insertNewObjectForEntityForName:@"Tags" inManagedObjectContext:self.context];
+    return newtag;
 }
 
 @end

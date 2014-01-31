@@ -10,6 +10,7 @@
 
 #import "LensRequest.h"
 #import "LensPost.h"
+#import "LensTag.h"
 
 #define     kTagData            @"data"
 #define     kTagPosts           @"posts"

@@ -84,12 +84,15 @@
     //save to context
     [self saveContext];
     
-    //launch asset request on main thread to hit queue
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for(LensAsset * asset in newAssets){
-            [[LensNetworkController sharedNetwork] getImageForAsset:asset.objectID];
-        }
-    });
+    //get first image first
+    LensAsset * first = [newAssets firstObject];
+    [[LensNetworkController sharedNetwork] getImageForAsset:first.objectID firstImage:YES];
+    [newAssets removeObjectAtIndex:0];
+    
+    //then launch request for all others
+    for(LensAsset * asset in newAssets){
+        [[LensNetworkController sharedNetwork] getImageForAsset:asset.objectID firstImage:NO];
+    }
 }
 
 - (LensAsset*)newAsset{

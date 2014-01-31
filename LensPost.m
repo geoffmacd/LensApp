@@ -35,4 +35,10 @@
     self.assets = tempSet;
 }
 
+- (void)addTagsObject:(LensTag *)value {
+    NSMutableOrderedSet* tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.tags];
+    [tempSet addObject:value];
+    self.tags = tempSet;
+}
+
 @end

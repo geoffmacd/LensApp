@@ -56,7 +56,7 @@
  * @param LensPost to get story for
  * @return LensStory
  */
--(LensStory*)getStoryForPost:(LensPost*)post;
+-(void)getStoryForPost:(NSManagedObjectID *)postId;
 
 /**
  * requests pictures for a post
@@ -72,7 +72,7 @@
  *
  * @param LensPost to get icon for
  */
--(void)getImageForAsset:(NSManagedObjectID*)assetId;
+-(void)getImageForAsset:(NSManagedObjectID*)assetId firstImage:(BOOL)first;
 
 /**
  * requests icon for post

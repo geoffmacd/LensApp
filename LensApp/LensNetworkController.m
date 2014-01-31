@@ -10,6 +10,7 @@
 
 #import "LensPostParse.h"
 #import "LensAssetsParse.h"
+#import "LensStoryParse.h"
 #import "LensImage.h"
 #import "LensAppDelegate.h"
 
@@ -33,6 +34,8 @@
         
         //config
         _queue = [[NSOperationQueue alloc] init];
+        [_queue setMaxConcurrentOperationCount:40];
+        
         _session = [NSURLSession sharedSession];
         
         //observe persistence changes
@@ -73,9 +76,29 @@
     return nil;
 }
 
--(LensStory *)getStoryForPost:(LensPost *)post{
+-(void)getStoryForPost:(NSManagedObjectID *)postId{
     
-    return nil;
+    LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext * newContext = [appDel threadContext];
+    LensPost * curPost = (LensPost *)[newContext objectWithID:postId];
+    
+    NSURL * storyUrl = [NSURL URLWithString:curPost.storyUrl];
+    NSURLRequest * req = [[NSURLRequest alloc] initWithURL:storyUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLSessionDataTask * task = [_session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        //on completion
+        //save relevant info to database
+        
+        if(!error){
+            //parse xml
+            LensStoryParse * parser = [[LensStoryParse alloc] initWithData:data forPostObjectId:postId];
+            //need to see story as quick as possible
+            [parser setQueuePriority:NSOperationQueuePriorityVeryHigh];
+            [_queue addOperation:parser];
+        }
+    }];
+    //must start
+    [task resume];
 }
 
 -(void)getAssetsForPost:(NSManagedObjectID *)postId{
@@ -102,7 +125,7 @@
 }
 
 
--(void)getImageForAsset:(NSManagedObjectID*)assetId{
+-(void)getImageForAsset:(NSManagedObjectID*)assetId firstImage:(BOOL)first{
     
     NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^{
         
@@ -124,6 +147,7 @@
         NSError * err;
         [newContext save:&err];
     }];
+    [op setQueuePriority:(first ? NSOperationQueuePriorityHigh : NSOperationQueuePriorityLow)];
     [_queue addOperation:op];
 }
 
