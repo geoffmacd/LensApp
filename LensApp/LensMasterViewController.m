@@ -154,6 +154,8 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
+        [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
+        
         LensAsset * asset = [post.assets firstObject];
         
         UIImage * image = [LensImage loadImage:asset.filename ofType:asset.extension];
