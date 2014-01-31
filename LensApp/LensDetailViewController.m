@@ -38,6 +38,8 @@
     if (self.detailItem) {
 //        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"date"] description];
         [self.imageView setImage:self.detailItem];
+        
+        [self.webview loadHTMLString:self.html baseURL:nil];
     }
 }
 

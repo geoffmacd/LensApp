@@ -8,13 +8,13 @@
 
 #import "LensStoryParse.h"
 
-#import <SMXMLDocument.h>
+#import <ElementParser.h>
 
 @implementation LensStoryParse
 
-- (instancetype)initWithData:(NSData *)parseData forPostObjectId:(NSManagedObjectID*)postId{
+- (instancetype)initWithPostObjectId:(NSManagedObjectID*)postId forData:(NSData*)data{
     
-    if (self = [super initWithData:parseData]) {
+    if (self = [super initWithData:data]) {
         _postId = postId;
     }
     return self;
@@ -22,71 +22,61 @@
 
 // The main function for this NSOperation, to start the parsing.
 - (void)main {
-    
-    //decode to string
-    NSData * data = [self.xmlString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSError * error;
-    SMXMLDocument *doc = [SMXMLDocument documentWithData:data error:&error];
-    
+    //post
     LensPost * post = (LensPost *)[self.context objectWithID:_postId];
     
-    if(!error){
+    //document with ElementParser
+	DocumentRoot* doc = [Element parseHTML: self.xmlString];
+    
+    //find entry-content div
+	NSArray* divs = [doc selectElements: @".entry-content"];
+    Element * div = [divs firstObject];
+    NSArray * elements = [div childElements];
+	NSMutableArray* results = [NSMutableArray new];
+    
+    //go through elements adding only image divs and paragraphs, end on hr
+	for (Element* element in elements){
         
-        SMXMLElement *bodyE = [doc.root childNamed:@"body"];
         
-        //find entry-content div
-        SMXMLElement * content = [bodyE descendantWithPath:@"shell.page.lens.aCol.content.entry-content"];
-        __block NSMutableArray * contentArray = [NSMutableArray new];
-        
-        //add up paragraph and image elements
-        __block BOOL scriptHit;
-        [[content children] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+
+        //add to collection html string
+        NSString * type = [element description];
+        NSString * contents = [element contentsText];
+        NSString * result;
+        if([type isEqualToString:@"<p>"]){
             
-            SMXMLElement * cur = obj;
+            result = [NSString stringWithFormat:@"<p>%@</p>",contents];
+        } else if([type rangeOfString:@"w480"].location != NSNotFound){
             
-            if(!scriptHit){
-                if([[cur name] isEqualToString:@"script"]){
-                    scriptHit = YES;
-                }
-            } else {
-                //if it is the footer stop
-                if([[cur name] isEqualToString:@"hr"]){
-                    *stop = YES;
-                }else{
-                    //add to collection html string
-                    [contentArray addObject:cur];
-                }
-            }
-            
-        }];
+            result = [NSString stringWithFormat:@"<div>%@</div>",contents];
+        }
+        if(result)
+            [results addObject:result];
+	}
+
+
+    __block NSString * html = @"<html><body>";
+    [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        //convert elements to text and save
-        __block NSString * contentHtml = @"";
-        
-        [contentArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            
-            SMXMLElement * cur = obj;
-            NSString * elStr = [cur description];
-            contentHtml = [contentHtml stringByAppendingString:elStr];
-        }];
-        
-        LensStory * newStory = [self newStory];
-        newStory.htmlContent = contentHtml;
-        //assign relations
-        newStory.post = post;
-        post.story = newStory;
-    }
+        NSString * elStr = obj;
+        html = [html stringByAppendingString:elStr];
+    }];
+    html = [html stringByAppendingString:@"</body></html>"];
+    
+    LensStory * newStory = [self newStory];
+    newStory.htmlContent = html;
+    //assign relations
+    newStory.post = post;
+    post.story = newStory;
     
     //save to context
     [self saveContext];
     
-
 }
 
 - (LensStory*)newStory{
     
-    LensStory * newStory = [NSEntityDescription insertNewObjectForEntityForName:@"Asset" inManagedObjectContext:self.context];
+    LensStory * newStory = [NSEntityDescription insertNewObjectForEntityForName:@"Story" inManagedObjectContext:self.context];
     return newStory;
 }
 

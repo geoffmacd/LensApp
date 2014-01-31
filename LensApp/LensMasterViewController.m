@@ -161,6 +161,7 @@
         UIImage * image = [LensImage loadImage:asset.filename ofType:asset.extension];
         
         [[segue destinationViewController] setDetailItem:image];
+        [[segue destinationViewController] setHtml:post.story.htmlContent];
     }
 }
 

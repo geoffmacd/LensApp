@@ -1,10 +1,13 @@
 PODS:
+  - ElementParser (0.0.1)
   - SMXMLDocument (1.0.1)
 
 DEPENDENCIES:
+  - ElementParser (~> 0.0.1)
   - SMXMLDocument (~> 1.0.1)
 
 SPEC CHECKSUMS:
+  ElementParser: 923b3bcbe3fbdd8e8afdef4b098337130c6a2404
   SMXMLDocument: ad233e93dd51c7f8929209b8f9db72becf817ae1
 
 COCOAPODS: 0.29.0

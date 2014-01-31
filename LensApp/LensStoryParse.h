@@ -28,6 +28,6 @@
 
 @property NSManagedObjectID * postId;
 
-- (instancetype)initWithData:(NSData *)parseData forPostObjectId:(NSManagedObjectID*)postId;
+- (instancetype)initWithPostObjectId:(NSManagedObjectID*)postId forData:(NSData*)data;
 
 @end

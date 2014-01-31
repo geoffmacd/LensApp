@@ -91,7 +91,7 @@
         
         if(!error){
             //parse xml
-            LensStoryParse * parser = [[LensStoryParse alloc] initWithData:data forPostObjectId:postId];
+            LensStoryParse * parser = [[LensStoryParse alloc] initWithPostObjectId:curPost.objectID forData:data];
             //need to see story as quick as possible
             [parser setQueuePriority:NSOperationQueuePriorityVeryHigh];
             [_queue addOperation:parser];
