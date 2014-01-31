@@ -8,6 +8,8 @@
 
 #import "LensDetailViewController.h"
 
+#import "LensImage.h"
+
 @interface LensDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 - (void)configureView;
@@ -39,6 +41,7 @@
 //        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"date"] description];
         [self.imageView setImage:self.detailItem];
         
+//        [self.webview loadHTMLString:self.html baseURL:[NSURL URLWithString:[LensImage imageDirectory]]];
         [self.webview loadHTMLString:self.html baseURL:nil];
     }
 }

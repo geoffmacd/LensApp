@@ -61,7 +61,7 @@
             
             NSError*  error = nil;
             NSArray * matches = [self.context executeFetchRequest:req error:&error];
-            if(error || ![matches count]){
+            if(!error && ![matches count]){
                 
                 LensAsset * newAsset = [self newAsset];
                 

@@ -8,6 +8,7 @@
 
 #import "LensStoryParse.h"
 
+#import "LensAsset.h"
 #import <ElementParser.h>
 
 @implementation LensStoryParse
@@ -46,14 +47,36 @@
         if([type isEqualToString:@"<p>"]){
             
             result = [NSString stringWithFormat:@"<p>%@</p>",contents];
+            
         } else if([type rangeOfString:@"w480"].location != NSNotFound){
             
-            result = [NSString stringWithFormat:@"<div>%@</div>",contents];
+//            Element * img = [element firstChild];
+//            NSString * imgPath = [img attribute:@"src"];
+//            NSString * filename = [[imgPath stringByDeletingPathExtension] lastPathComponent];
+//            
+//            //search for filename to use an already downloaded asset
+//            NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Asset"];
+//            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"filename == %@", filename];
+//            [req setPredicate:predicate];
+//            
+//            NSError*  error = nil;
+//            NSArray * matches = [self.context executeFetchRequest:req error:&error];
+//            if(!error){
+//                if([matches count]){
+//                    LensAsset * asset = [matches firstObject];
+//                    result = [NSString stringWithFormat:@"<div><img src='%@.%@'></img></div>",asset.filename, asset.extension];
+//                }
+//            }
+            
+            //add img which is always first child
+            NSString * imgTag = [[element firstChild] description];
+            result = [NSString stringWithFormat:@"<div>%@<span>%@</span></div>",imgTag, contents];
         }
+        
+        //add to array to display natively
         if(result)
             [results addObject:result];
 	}
-
 
     __block NSString * html = @"<html><body>";
     [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
