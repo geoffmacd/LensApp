@@ -1,0 +1,92 @@
+//
+//  LensImage.m
+//  LensApp
+//
+//  Created by Xtreme Dev on 1/30/2014.
+//  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
+//
+
+#import "LensImageCache.h"
+#import "LensAppDelegate.h"
+
+@implementation LensImageCache
+
+
+-(instancetype)init{
+    
+    if(self =[super init]){
+        //config
+        [self setCountLimit:100];
+    }
+    return self;
+}
+
+-(void)cacheImage:(LensAssetImageWrapper*)image{
+    
+    NSString * key = image.intendedName;
+    [self setObject:image forKey:key];
+}
+
+
+-(void)persistImage:(LensAssetImageWrapper*)image{
+    
+    [self saveImage:(UIImage*)image withFileName:image.intendedName ofType:image.extension];
+    
+    //purge from cache
+    [self removeObjectForKey:image.intendedName];
+}
+
+
+-(UIImage*)retrieveImage:(NSString*)filename{
+    
+    //try cache
+    LensAssetImageWrapper * image = [self objectForKey:filename];
+    if(!image){
+        //try UIImage cache
+        UIImage * uiImage = [UIImage imageNamed:filename];
+        if(!uiImage)
+            return nil;
+        else
+            return uiImage;
+    } else {
+        return (UIImage*)image;
+    }
+}
+
+//-(UIImage *)loadImage:(NSString *)fileName ofType:(NSString *)extension{
+//    
+//    NSString * path = [NSString stringWithFormat:@"%@/%@.%@", [self imageDirectory], fileName, extension];
+//    UIImage * result = [UIImage imageWithContentsOfFile:path];
+//    return result;
+//}
+
+-(void)saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension {
+    
+    if ([[extension lowercaseString] isEqualToString:@"png"]) {
+        NSString * path = [[self imageDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"png"]];
+        [UIImagePNGRepresentation(image) writeToFile:path options:NSAtomicWrite error:nil];
+    } else if ([[extension lowercaseString] isEqualToString:@"jpg"] || [[extension lowercaseString] isEqualToString:@"jpeg"]) {
+        NSString * path = [[self imageDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]];
+        NSError * error;
+        [UIImageJPEGRepresentation(image, 1.0) writeToFile:path options:NSAtomicWrite error:&error];
+        if(error){
+            NSLog(@"%@", [error description]);
+        }
+    } else {
+        NSLog(@"Image Save Failed\nExtension: (%@) is not recognized, use (PNG/JPG)", extension);
+    }
+}
+
+-(NSString*)imageDirectory{
+    
+    LensAppDelegate * app = [[UIApplication sharedApplication] delegate];
+    NSURL * imageUrl = [[app applicationDocumentsDirectory] URLByAppendingPathComponent:@"images"];
+    NSString * result = [imageUrl path];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:result])
+        [[NSFileManager defaultManager] createDirectoryAtPath:result withIntermediateDirectories:NO attributes:nil error:nil]; //Create folder
+    
+    return result;
+}
+
+@end

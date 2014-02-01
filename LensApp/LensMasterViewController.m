@@ -10,7 +10,7 @@
 
 #import "LensDetailViewController.h"
 #import "LensNetworkController.h"
-#import "LensImage.h"
+#import "LensImageCache.h"
 
 @interface LensMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;

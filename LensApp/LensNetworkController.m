@@ -12,9 +12,13 @@
 #import "LensAssetsParse.h"
 #import "LensStoryParse.h"
 #import "LensArchiveParse.h"
-#import "LensImage.h"
+#import "LensImageCache.h"
 #import "LensAppDelegate.h"
-
+#import "LensAssetImageWrapper.h"
+#import "LensAuthor.h"
+#import "LensPost.h"
+#import "LensStory.h"
+#import "LensAsset.h"
 
 @implementation LensNetworkController
 
@@ -35,9 +39,10 @@
         
         //config
         _queue = [[NSOperationQueue alloc] init];
-        [_queue setMaxConcurrentOperationCount:10];
-        
         _session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        //image cache only for assets
+        _imageCache = [[LensImageCache alloc] init];
+        [_imageCache setDelegate:self];
         
         //observe persistence changes
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -49,8 +54,6 @@
 
 -(void)contextWasSaved:(NSNotification*)notification{
     
-    //1. launch requests for stories, assets, icons depending on state of LensPost and prioritize based on
-    //2. notifies controllers that 
 }
 
 -(void)getCurrentPosts{
@@ -110,12 +113,7 @@
             //must start
             [task resume];
         }
-        
     }
-}
-
--(void)getArchivedAssets:(NSManagedObjectID*)postId{
-    
 }
 
 -(void)getStoryForPost:(NSManagedObjectID *)postId{
@@ -175,12 +173,10 @@
         LensAsset * curAsset = (LensAsset *)[newContext objectWithID:assetId];
         
         NSString * url = [curAsset imageUrl];
-        UIImage * image = [LensImage getImageFromURL:url];
-        NSString * type = [url pathExtension];
-        NSString * filename = [[url stringByDeletingPathExtension] lastPathComponent];
         
-        [LensImage saveImage:image withFileName:filename ofType:type];
+        UIImage * image = [LensImageCache getImageFromURL:url];
         
+        [LensImageCache saveImage:image withFileName:filename ofType:type];
         
         curAsset.filename = filename;
         curAsset.extension = type;
@@ -193,10 +189,10 @@
 
 -(void)triggerRemainingAssets:(NSManagedObjectID*)postId{
     
-    
     LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
     NSManagedObjectContext * newContext = [appDel threadContext];
     LensPost * post = (LensPost *)[newContext objectWithID:postId];
+    
     
     //fetch posts with same title
     NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Asset"];
@@ -227,11 +223,11 @@
         LensPost * post = (LensPost *)[newContext objectWithID:postId];
         
         NSString * url = [post iconUrl];
-        UIImage * image = [LensImage getImageFromURL:url];
+        UIImage * image = [LensImageCache getImageFromURL:url];
         NSString * type = [url pathExtension];
         NSString * filename = [[url stringByDeletingPathExtension] lastPathComponent];
         
-        [LensImage saveImage:image withFileName:filename ofType:type];
+        [LensImageCache saveImage:image withFileName:filename ofType:type];
         
         post.iconFile = filename;
         post.iconExtension = type;
@@ -240,6 +236,20 @@
         [newContext save:&err];
     }];
     [_queue addOperation:op];
+}
+
+#pragma mark NSCacheDelegate 
+
+-(void)cache:(NSCache *)cache willEvictObject:(id)obj{
+    
+    //if evicted image should be saved, save it to file
+    LensAssetImageWrapper * asset = obj;
+    
+    //look up associated asset
+    if(asset){
+        
+        
+    }
 }
 
 @end

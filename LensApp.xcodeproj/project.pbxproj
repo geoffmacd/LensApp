@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		244AF664189D7B6D004A7C67 /* LensAssetImageWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 244AF663189D7B6D004A7C67 /* LensAssetImageWrapper.m */; };
 		24E420FE189C7F160030C750 /* LensPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E420FD189C7F160030C750 /* LensPost.m */; };
 		24E42101189C8ECB0030C750 /* LensArchiveParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E42100189C8ECB0030C750 /* LensArchiveParse.m */; };
 		B538BB5316864AF98F063ED1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2DE5F6974B74BEF99CFB478 /* libPods.a */; };
-		C339F4F3189AF20C00416632 /* LensImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C339F4F2189AF20C00416632 /* LensImage.m */; };
+		C339F4F3189AF20C00416632 /* LensImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C339F4F2189AF20C00416632 /* LensImageCache.m */; };
 		C339F4F6189AF72100416632 /* LensAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = C339F4F5189AF72100416632 /* LensAsset.m */; };
 		C36A3BD21899A119002B900E /* LensPostParse.m in Sources */ = {isa = PBXBuildFile; fileRef = C36A3BD11899A119002B900E /* LensPostParse.m */; };
 		C36A3BD71899AE12002B900E /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = C36A3BD41899AE12002B900E /* GTMNSString+HTML.m */; };
@@ -54,13 +55,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		244AF662189D7B6D004A7C67 /* LensAssetImageWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensAssetImageWrapper.h; sourceTree = "<group>"; };
+		244AF663189D7B6D004A7C67 /* LensAssetImageWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensAssetImageWrapper.m; sourceTree = "<group>"; };
 		24E420FC189C7F160030C750 /* LensPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensPost.h; sourceTree = "<group>"; };
 		24E420FD189C7F160030C750 /* LensPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensPost.m; sourceTree = "<group>"; };
 		24E420FF189C8ECB0030C750 /* LensArchiveParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensArchiveParse.h; sourceTree = "<group>"; };
 		24E42100189C8ECB0030C750 /* LensArchiveParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensArchiveParse.m; sourceTree = "<group>"; };
 		5D88A05A68EE4C4FAF04D141 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		C339F4F1189AF20C00416632 /* LensImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensImage.h; sourceTree = "<group>"; };
-		C339F4F2189AF20C00416632 /* LensImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensImage.m; sourceTree = "<group>"; };
+		C339F4F1189AF20C00416632 /* LensImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensImageCache.h; sourceTree = "<group>"; };
+		C339F4F2189AF20C00416632 /* LensImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensImageCache.m; sourceTree = "<group>"; };
 		C339F4F4189AF72100416632 /* LensAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensAsset.h; sourceTree = "<group>"; };
 		C339F4F5189AF72100416632 /* LensAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensAsset.m; sourceTree = "<group>"; };
 		C36A3BD01899A119002B900E /* LensPostParse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensPostParse.h; sourceTree = "<group>"; };
@@ -140,8 +143,8 @@
 		C339F4F0189AF1F900416632 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				C339F4F1189AF20C00416632 /* LensImage.h */,
-				C339F4F2189AF20C00416632 /* LensImage.m */,
+				C339F4F1189AF20C00416632 /* LensImageCache.h */,
+				C339F4F2189AF20C00416632 /* LensImageCache.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -171,6 +174,8 @@
 				C36A3BF8189ADBC0002B900E /* LensTag.m */,
 				C36A3BF1189ADB62002B900E /* LensStory.h */,
 				C36A3BF2189ADB62002B900E /* LensStory.m */,
+				244AF662189D7B6D004A7C67 /* LensAssetImageWrapper.h */,
+				244AF663189D7B6D004A7C67 /* LensAssetImageWrapper.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -419,10 +424,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C339F4F3189AF20C00416632 /* LensImage.m in Sources */,
+				C339F4F3189AF20C00416632 /* LensImageCache.m in Sources */,
 				C36A3BD21899A119002B900E /* LensPostParse.m in Sources */,
 				24E42101189C8ECB0030C750 /* LensArchiveParse.m in Sources */,
 				C36A3BF9189ADBC0002B900E /* LensTag.m in Sources */,
+				244AF664189D7B6D004A7C67 /* LensAssetImageWrapper.m in Sources */,
 				C36A3BF0189AC5A3002B900E /* LensRequest.m in Sources */,
 				C3ACEBDD1893036D0052E182 /* LensAppDelegate.m in Sources */,
 				C36A3BED1899C175002B900E /* LensAssetsParse.m in Sources */,

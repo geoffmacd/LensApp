@@ -8,7 +8,7 @@
 
 #import "LensDetailViewController.h"
 
-#import "LensImage.h"
+#import "LensImageCache.h"
 
 @interface LensDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;

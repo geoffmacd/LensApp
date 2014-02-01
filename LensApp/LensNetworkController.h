@@ -8,19 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-#import "LensAuthor.h"
-#import "LensPost.h"
-#import "LensStory.h"
-#import "LensAsset.h"
+#import "LensImageCache.h"
 
 #define AssetDataUrl        @"http://lens.blogs.nytimes.com/asset-data/"
 #define ArchiveUrl          @"http://lens.blogs.nytimes.com/"
 
 
-@interface LensNetworkController : NSObject
+@interface LensNetworkController : NSObject <NSCacheDelegate>
 
 @property NSOperationQueue * queue;
 @property NSURLSession * session;
+@property LensImageCache * imageCache;
 
 
 -(instancetype)init;
@@ -48,14 +46,6 @@
  * @param NSDate ending date
  */
 -(void)getArchivePosts:(NSDate *)startDate withEnd:(NSDate *)endDate;
-
-/**
- * retrieves assets xml for archived post
- * @author Geoff MacDonald
- *
- * @param NSManagedObjectID post id
- */
--(void)getArchivedAssets:(NSManagedObjectID*)postId;
 
 /**
  * requests and parses html content for post and formats correctly for uiwebview load in LensStory
