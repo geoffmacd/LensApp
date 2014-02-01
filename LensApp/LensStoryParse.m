@@ -38,8 +38,6 @@
     //go through elements adding only image divs and paragraphs, end on hr
 	for (Element* element in elements){
         
-        
-
         //add to collection html string
         NSString * type = [element description];
         NSString * contents = [element contentsText];
@@ -86,6 +84,32 @@
     }];
     html = [html stringByAppendingString:@"</body></html>"];
     
+    //find author
+	NSArray* addressDivs = [doc selectElements: @"address"];
+    Element * address = [addressDivs firstObject];
+    Element * linkEl = [address firstChild];
+    NSString * authorName = [linkEl contentsText];
+    //search for author
+    NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Author"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", authorName];
+    [req setPredicate:predicate];
+
+    NSError*  error = nil;
+    NSArray * matches = [self.context executeFetchRequest:req error:&error];
+    LensAuthor * author;
+    if(!error){
+        if([matches count]){
+            author = [matches firstObject];
+        }
+    }
+    
+    if(!author){
+        author = [self newAuthor];
+    }
+    
+    [author addPostsObject:post];
+    post.author = author;
+    
     LensStory * newStory = [self newStory];
     newStory.htmlContent = html;
     //assign relations
@@ -103,4 +127,9 @@
     return newStory;
 }
 
+- (LensAuthor*)newAuthor{
+    
+    LensAuthor * newAuthor = [NSEntityDescription insertNewObjectForEntityForName:@"Author" inManagedObjectContext:self.context];
+    return newAuthor;
+}
 @end

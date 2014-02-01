@@ -56,7 +56,7 @@
             
             //fetch posts with same title
             NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Asset"];
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"imageUrl == %@", imageUrl];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"post == %@", imageUrl];
             [req setPredicate:predicate];
             
             NSError*  error = nil;
@@ -84,14 +84,14 @@
     //save to context
     [self saveContext];
     
-    //get first image first
-    LensAsset * first = [newAssets firstObject];
-    [[LensNetworkController sharedNetwork] getImageForAsset:first.objectID firstImage:YES];
-    [newAssets removeObjectAtIndex:0];
-    
-    //then launch request for all others
-    for(LensAsset * asset in newAssets){
-        [[LensNetworkController sharedNetwork] getImageForAsset:asset.objectID firstImage:NO];
+    //get first two images
+    if([newAssets count]){
+        LensAsset * first = [newAssets firstObject];
+        [[LensNetworkController sharedNetwork] getImageForAsset:first.objectID withPriority:NSOperationQueuePriorityHigh];
+    }
+    if([newAssets count] > 1){
+        LensAsset * second = newAssets[1];
+        [[LensNetworkController sharedNetwork] getImageForAsset:second.objectID withPriority:NSOperationQueuePriorityLow];
     }
 }
 

@@ -155,6 +155,8 @@
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
         [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
+        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
+        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
         
         LensAsset * asset = [post.assets firstObject];
         

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LensDetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface LensDetailViewController : UIViewController <UISplitViewControllerDelegate,UIWebViewDelegate>
 
 @property (strong, nonatomic) id detailItem;
 @property (strong, nonatomic) NSString * html;

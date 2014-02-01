@@ -71,8 +71,19 @@
  * @author Geoff MacDonald
  *
  * @param LensPost to get icon for
+ * @param priority to set on queue
  */
--(void)getImageForAsset:(NSManagedObjectID*)assetId firstImage:(BOOL)first;
+-(void)getImageForAsset:(NSManagedObjectID*)assetId withPriority:(NSOperationQueuePriority)priority;
+
+
+/**
+ * requests image asset
+ * @author Geoff MacDonald
+ *
+ * @param LensPost to get icon for
+ */
+-(void)triggerRemainingAssets:(NSManagedObjectID*)postId;
+
 
 /**
  * requests icon for post
@@ -80,6 +91,6 @@
  *
  * @param LensPost to get icon for
  */
--(void)getIconForPost:(LensPost*)post;
+-(void)getIconForPost:(NSManagedObjectID*)postId;
 
 @end

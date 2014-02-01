@@ -34,7 +34,7 @@
         
         //config
         _queue = [[NSOperationQueue alloc] init];
-        [_queue setMaxConcurrentOperationCount:40];
+        [_queue setMaxConcurrentOperationCount:10];
         
         _session = [NSURLSession sharedSession];
         
@@ -124,8 +124,7 @@
     [task resume];
 }
 
-
--(void)getImageForAsset:(NSManagedObjectID*)assetId firstImage:(BOOL)first{
+-(void)getImageForAsset:(NSManagedObjectID*)assetId withPriority:(NSOperationQueuePriority)priority{
     
     NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^{
         
@@ -147,17 +146,58 @@
         NSError * err;
         [newContext save:&err];
     }];
-    [op setQueuePriority:(first ? NSOperationQueuePriorityHigh : NSOperationQueuePriorityLow)];
     [_queue addOperation:op];
 }
 
--(void)getIconForPost:(LensPost *)post{
+-(void)triggerRemainingAssets:(NSManagedObjectID*)postId{
     
+    
+    LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext * newContext = [appDel threadContext];
+    LensPost * post = (LensPost *)[newContext objectWithID:postId];
+    
+    //fetch posts with same title
+    NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Asset"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"post == %@", post];
+    [req setPredicate:predicate];
+    
+    NSError*  error = nil;
+    NSArray * matches = [newContext executeFetchRequest:req error:&error];
+    if(!error && [matches count]){
+        //determine if assets have downloaded there images
+        [matches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            LensAsset * curAsset = (LensAsset * )obj;
+            if(!curAsset.filename){
+                //prioritize closest images
+                [self getImageForAsset:curAsset.objectID withPriority:(idx < 4 ? NSOperationQueuePriorityVeryHigh : NSOperationQueuePriorityNormal)];
+            }
+            
+        }];
+    }
 }
 
-
-
-
-
+-(void)getIconForPost:(NSManagedObjectID*)postId{
+    
+    NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^{
+        
+        LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+        NSManagedObjectContext * newContext = [appDel threadContext];
+        LensPost * post = (LensPost *)[newContext objectWithID:postId];
+        
+        NSString * url = [post iconUrl];
+        UIImage * image = [LensImage getImageFromURL:url];
+        NSString * type = [url pathExtension];
+        NSString * filename = [[url stringByDeletingPathExtension] lastPathComponent];
+        
+        [LensImage saveImage:image withFileName:filename ofType:type];
+        
+        post.iconFile = filename;
+        post.iconExtension = type;
+        
+        NSError * err;
+        [newContext save:&err];
+    }];
+    [_queue addOperation:op];
+}
 
 @end

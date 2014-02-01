@@ -2,7 +2,7 @@
 //  LensPost.m
 //  LensApp
 //
-//  Created by Xtreme Dev on 1/30/2014.
+//  Created by Geoff MacDonald on 1/31/2014.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
@@ -19,14 +19,14 @@
 @dynamic date;
 @dynamic excerpt;
 @dynamic iconUrl;
-@dynamic localIconUrl;
 @dynamic storyUrl;
 @dynamic title;
+@dynamic iconFile;
+@dynamic iconExtension;
 @dynamic assets;
 @dynamic author;
 @dynamic story;
 @dynamic tags;
-
 
 //hack for broken CoreDataGeneratedAccessors method
 - (void)addAssetsObject:(LensAsset *)value {

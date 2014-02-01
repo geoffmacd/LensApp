@@ -2,7 +2,7 @@
 //  LensPost.h
 //  LensApp
 //
-//  Created by Xtreme Dev on 1/30/2014.
+//  Created by Geoff MacDonald on 1/31/2014.
 //  Copyright (c) 2014 GeoffMacDonald. All rights reserved.
 //
 
@@ -17,9 +17,10 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * excerpt;
 @property (nonatomic, retain) NSString * iconUrl;
-@property (nonatomic, retain) NSString * localIconUrl;
 @property (nonatomic, retain) NSString * storyUrl;
 @property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * iconFile;
+@property (nonatomic, retain) NSString * iconExtension;
 @property (nonatomic, retain) NSOrderedSet *assets;
 @property (nonatomic, retain) LensAuthor *author;
 @property (nonatomic, retain) LensStory *story;
