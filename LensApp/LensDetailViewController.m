@@ -19,14 +19,11 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+-(void)setHtml:(NSString *)html
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
-    }
+    // Update the view.
+    _html = html;
+    [self configureView];
 
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
@@ -37,13 +34,7 @@
 {
     // Update the user interface for the detail item.
 
-    if (self.detailItem) {
-//        self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"date"] description];
-        [self.imageView setImage:self.detailItem];
-        
-//        [self.webview loadHTMLString:self.html baseURL:[NSURL URLWithString:[LensImage imageDirectory]]];
-        [self.webview loadHTMLString:self.html baseURL:nil];
-    }
+    [self.webview loadHTMLString:self.html baseURL:nil];
 }
 
 - (void)viewDidLoad

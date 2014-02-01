@@ -14,6 +14,7 @@
 #import "LensAsset.h"
 
 #define AssetDataUrl        @"http://lens.blogs.nytimes.com/asset-data/"
+#define ArchiveUrl          @"http://lens.blogs.nytimes.com/"
 
 
 @interface LensNetworkController : NSObject
@@ -45,9 +46,16 @@
  *
  * @param NSDate starting date
  * @param NSDate ending date
- * @return NSArray of LensPost
  */
--(NSArray*)getArchivePosts:(NSDate*)startDate withEnd:(NSDate*)endDate;
+-(void)getArchivePosts:(NSDate *)startDate withEnd:(NSDate *)endDate;
+
+/**
+ * retrieves assets xml for archived post
+ * @author Geoff MacDonald
+ *
+ * @param NSManagedObjectID post id
+ */
+-(void)getArchivedAssets:(NSManagedObjectID*)postId;
 
 /**
  * requests and parses html content for post and formats correctly for uiwebview load in LensStory

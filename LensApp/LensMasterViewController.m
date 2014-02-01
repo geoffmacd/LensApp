@@ -31,6 +31,13 @@
     
     //retrieve current posts
     [[LensNetworkController sharedNetwork] getCurrentPosts];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setMonth:-1];
+
+    [[LensNetworkController sharedNetwork] getArchivePosts:[NSDate date] withEnd:[gregorian dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0]];
 }
 
 - (void)viewDidLoad
@@ -141,10 +148,18 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
-        LensAsset * asset = [post.assets firstObject];
+        [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
+        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
+        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
+        //        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        //
+        //        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+        //        [offsetComponents setYear:-1];
+        //
+        //        [[LensNetworkController sharedNetwork] getArchivePosts:[NSDate date] withEnd:[gregorian dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0]];
         
-        UIImage * image = [LensImage loadImage:asset.filename ofType:asset.extension];
-        self.detailViewController.detailItem = image;
+        LensStory * story = post.story;
+        self.detailViewController.html = story.htmlContent;
     }
 }
 
@@ -157,12 +172,14 @@
         [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
         [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
         [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
+//        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//        
+//        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+//        [offsetComponents setYear:-1];
+//
+//        [[LensNetworkController sharedNetwork] getArchivePosts:[NSDate date] withEnd:[gregorian dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0]];
         
-        LensAsset * asset = [post.assets firstObject];
         
-        UIImage * image = [LensImage loadImage:asset.filename ofType:asset.extension];
-        
-        [[segue destinationViewController] setDetailItem:image];
         [[segue destinationViewController] setHtml:post.story.htmlContent];
     }
 }

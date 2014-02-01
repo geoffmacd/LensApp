@@ -108,12 +108,9 @@
     //save to context
     [self saveContext];
     
-    //launch asset request on main thread to hit queue
-    dispatch_async(dispatch_get_main_queue(), ^{
-        for(LensPost * post in newPosts){
-            [[LensNetworkController sharedNetwork] getAssetsForPost:post.objectID];
-        }
-    });
+    for(LensPost * post in newPosts){
+        [[LensNetworkController sharedNetwork] getAssetsForPost:post.objectID];
+    }
 }
 
 - (LensPost*)newPost{

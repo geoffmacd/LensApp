@@ -9,6 +9,7 @@
 #import "LensStoryParse.h"
 
 #import "LensAsset.h"
+#import "LensNetworkController.h"
 #import <ElementParser.h>
 
 @implementation LensStoryParse
@@ -23,6 +24,9 @@
 
 // The main function for this NSOperation, to start the parsing.
 - (void)main {
+    
+    BOOL getAssets = NO;
+    
     //post
     LensPost * post = (LensPost *)[self.context objectWithID:_postId];
     
@@ -105,6 +109,59 @@
     
     if(!author){
         author = [self newAuthor];
+        author.name = authorName;
+    }
+    
+    //if no assets in post, find assets
+    if(!post.assetUrl){
+        //find .xml') in string
+        NSRange xmlR = [self.xmlString rangeOfString:@".xml')"];
+        if(xmlR.location != NSNotFound){
+            NSString * first = [self.xmlString substringToIndex:xmlR.location];
+            NSRange httpR = [first rangeOfString:@"http" options:NSBackwardsSearch];
+            if(httpR.location != NSNotFound){
+                //found complete xml
+                NSRange fileRange = NSMakeRange(httpR.location, xmlR.location + xmlR.length - 2 - httpR.location);
+                NSString * assetsUrl = [self.xmlString substringWithRange:fileRange];
+                post.assetUrl = assetsUrl;
+                //immediately launch assets request
+                getAssets = YES;
+            }
+        }
+    }
+    
+    //if no tags, find tags at bottom
+    if(![post.tags count]){
+        NSArray* tags = [doc selectElements: @".tags"];
+        for(Element * tag in tags){
+            //in link text
+            NSString * tagText = [tag contentsText];
+            NSArray * tagArray = [tagText componentsSeparatedByString:@","];
+            
+            for(NSString * whiteName in tagArray){
+                
+                NSString * tagName = [whiteName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                NSFetchRequest * tagReq = [[NSFetchRequest alloc] initWithEntityName:@"Tags"];
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@", tagName];
+                [tagReq setPredicate:predicate];
+                
+                NSError * err = nil;
+                NSArray * tagMatch = [self.context executeFetchRequest:tagReq error:&err];
+                LensTag * curTag;
+                if(!err && ![tagMatch count]){
+                    
+                    curTag = [self newTag];
+                    curTag.name = tagName;
+                } else if ([tagMatch count]){
+                    curTag = [tagMatch firstObject];
+                }
+                //add tag to post and post to tag
+                if(curTag){
+                    [curTag addPostsObject: post];
+                    [post addTagsObject:curTag];
+                }
+            }
+        }
     }
     
     [author addPostsObject:post];
@@ -119,6 +176,10 @@
     //save to context
     [self saveContext];
     
+    //after save to ensure post has saved
+    if(getAssets)
+        [[LensNetworkController sharedNetwork] getAssetsForPost:post.objectID];
+    
 }
 
 - (LensStory*)newStory{
@@ -131,5 +192,11 @@
     
     LensAuthor * newAuthor = [NSEntityDescription insertNewObjectForEntityForName:@"Author" inManagedObjectContext:self.context];
     return newAuthor;
+}
+
+- (LensTag*)newTag{
+    
+    LensTag * newTag = [NSEntityDescription insertNewObjectForEntityForName:@"Tags" inManagedObjectContext:self.context];
+    return newTag;
 }
 @end

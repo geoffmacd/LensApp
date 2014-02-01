@@ -11,6 +11,7 @@
 #import "LensPostParse.h"
 #import "LensAssetsParse.h"
 #import "LensStoryParse.h"
+#import "LensArchiveParse.h"
 #import "LensImage.h"
 #import "LensAppDelegate.h"
 
@@ -36,7 +37,7 @@
         _queue = [[NSOperationQueue alloc] init];
         [_queue setMaxConcurrentOperationCount:10];
         
-        _session = [NSURLSession sharedSession];
+        _session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         
         //observe persistence changes
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -64,6 +65,7 @@
         if(!error){
             //parse xml
             LensPostParse * parser = [[LensPostParse alloc] initWithData:data];
+            [parser setQueuePriority:NSOperationQueuePriorityHigh];
             [_queue addOperation:parser];
         }
     }];
@@ -71,9 +73,49 @@
     [task resume];
 }
 
--(NSArray *)getArchivePosts:(NSDate *)startDate withEnd:(NSDate *)endDate{
+-(void)getArchivePosts:(NSDate *)startDate withEnd:(NSDate *)endDate{
     
-    return nil;
+    //for each month, scrape monthly archive page with yy/mm name
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents * startC = [gregorian components:(NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:startDate];
+    NSDateComponents * endC = [gregorian components:(NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:endDate];
+    
+    //for each month make one request starting from start (most recent)
+    NSInteger year = startC.year;
+    for (NSInteger i = startC.month + 12 *(startC.year - endC.year); i >= endC.month; i--) {
+        NSInteger month = i % 12;
+        if(month == 0){
+            year--;
+            month = 12;
+        }
+        
+        NSLog(@"%ld / %ld", (long)year, (long)month);
+        
+        //archive has pagination, and we can assume no more than 5 pages of posts
+        for (NSInteger page = 1; page  < 6; page++) {
+            
+            NSURL * archiveUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%ld/%ld/page/%ld",ArchiveUrl, (long)year, (long)month,(long)page]];
+            NSURLRequest * req = [[NSURLRequest alloc] initWithURL:archiveUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+            NSURLSessionDataTask * task = [_session dataTaskWithRequest:req completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
+                //on completion
+                //save relevant info to database
+                if(!error){
+                    //parse html
+                    LensArchiveParse * parser = [[LensArchiveParse alloc] initWithData:data];
+                    [parser setQueuePriority:NSOperationQueuePriorityLow];
+                    [_queue addOperation:parser];
+                }
+            }];
+            //must start
+            [task resume];
+        }
+        
+    }
+}
+
+-(void)getArchivedAssets:(NSManagedObjectID*)postId{
+    
 }
 
 -(void)getStoryForPost:(NSManagedObjectID *)postId{

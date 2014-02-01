@@ -89,10 +89,13 @@
         LensAsset * first = [newAssets firstObject];
         [[LensNetworkController sharedNetwork] getImageForAsset:first.objectID withPriority:NSOperationQueuePriorityHigh];
     }
-    if([newAssets count] > 1){
-        LensAsset * second = newAssets[1];
-        [[LensNetworkController sharedNetwork] getImageForAsset:second.objectID withPriority:NSOperationQueuePriorityLow];
-    }
+//    if([newAssets count] > 1){
+//        LensAsset * second = newAssets[1];
+//        [[LensNetworkController sharedNetwork] getImageForAsset:second.objectID withPriority:NSOperationQueuePriorityLow];
+//    }
+    
+    //get story, will not get assets from story parse
+    [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
 }
 
 - (LensAsset*)newAsset{
