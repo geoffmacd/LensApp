@@ -11,6 +11,8 @@
 @interface LensDetailViewController : UIViewController <UISplitViewControllerDelegate,UIWebViewDelegate>
 
 @property (strong, nonatomic) NSString * html;
+@property (strong, nonatomic) UIImage * image;
 
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 @end

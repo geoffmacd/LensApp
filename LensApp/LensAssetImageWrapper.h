@@ -14,7 +14,12 @@
 @property (copy) NSString * intendedName;
 @property (copy) NSString * extension;
 @property BOOL shouldPersist;
+@property BOOL isIcon;
+@property NSInteger getCount;
 
 @property UIImage * image;
+
+-(instancetype)initWithName:(NSString*)fileName assetId:(NSManagedObjectID*)assetId;
+-(BOOL) getImageFromURL:(NSString *)fileURL;
 
 @end

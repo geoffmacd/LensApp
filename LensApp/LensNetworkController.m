@@ -42,7 +42,6 @@
         _session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         //image cache only for assets
         _imageCache = [[LensImageCache alloc] init];
-        [_imageCache setDelegate:self];
         
         //observe persistence changes
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -173,16 +172,18 @@
         LensAsset * curAsset = (LensAsset *)[newContext objectWithID:assetId];
         
         NSString * url = [curAsset imageUrl];
+        NSString * type = [url pathExtension];
+        NSString * filename = [[url stringByDeletingPathExtension] lastPathComponent];
         
-        UIImage * image = [LensImageCache getImageFromURL:url];
-        
-        [LensImageCache saveImage:image withFileName:filename ofType:type];
-        
-        curAsset.filename = filename;
-        curAsset.extension = type;
-        
-        NSError * err;
-        [newContext save:&err];
+        LensAssetImageWrapper * imagewrap = [[LensAssetImageWrapper alloc] initWithName:filename assetId:assetId];
+        if([imagewrap getImageFromURL:url]){
+            //save image with names
+            [_imageCache cacheImage:imagewrap];
+            curAsset.filename = filename;
+            curAsset.extension = type;
+            
+            [self saveContext:newContext];
+        }
     }];
     [_queue addOperation:op];
 }
@@ -223,32 +224,36 @@
         LensPost * post = (LensPost *)[newContext objectWithID:postId];
         
         NSString * url = [post iconUrl];
-        UIImage * image = [LensImageCache getImageFromURL:url];
         NSString * type = [url pathExtension];
         NSString * filename = [[url stringByDeletingPathExtension] lastPathComponent];
         
-        [LensImageCache saveImage:image withFileName:filename ofType:type];
         
-        post.iconFile = filename;
-        post.iconExtension = type;
-        
-        NSError * err;
-        [newContext save:&err];
+        LensAssetImageWrapper * imagewrap = [[LensAssetImageWrapper alloc] initWithName:filename assetId:nil];
+        if([imagewrap getImageFromURL:url]){
+            //save image with names
+            [_imageCache cacheImage:imagewrap];
+            post.iconFile = filename;
+            post.iconExtension = type;
+            
+            [self saveContext:newContext];
+        }
     }];
     [_queue addOperation:op];
 }
 
-#pragma mark NSCacheDelegate 
-
--(void)cache:(NSCache *)cache willEvictObject:(id)obj{
+-(void)saveContext:(NSManagedObjectContext*)context{
     
-    //if evicted image should be saved, save it to file
-    LensAssetImageWrapper * asset = obj;
-    
-    //look up associated asset
-    if(asset){
-        
-        
+    NSError * error;
+    if (context != nil) {
+        if ([context hasChanges]){
+            if(![context save:&error]) {
+                // Replace this implementation with code to handle the error appropriately.
+                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                abort();
+                
+            }
+        }
     }
 }
 

@@ -16,12 +16,20 @@
         _assetId = assetId;
         _extension = [fileName pathExtension];
         _intendedName = [[fileName stringByDeletingPathExtension] lastPathComponent];
-        
+        _isIcon = (assetId ? NO : YES);
+        _getCount = 0;
     }
     return self;
 }
 
+-(UIImage *)image{
+    _getCount++;
+    
+    return _image;
+}
+
 -(BOOL) getImageFromURL:(NSString *)fileURL {
+    NSLog(@"fetching image from : %@", [fileURL description]);
     
     UIImage * result;
 

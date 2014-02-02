@@ -30,11 +30,17 @@
     }        
 }
 
+-(void)setImage:(UIImage *)image{
+    _image = image;
+
+}
+
 - (void)configureView
 {
     // Update the user interface for the detail item.
 
     [self.webview loadHTMLString:self.html baseURL:nil];
+    [self.imageView setImage:_image];
 }
 
 - (void)viewDidLoad

@@ -10,7 +10,7 @@
 
 #import "LensAssetImageWrapper.h"
 
-@interface LensImageCache : NSCache
+@interface LensImageCache : NSCache <NSCacheDelegate>
 
 
 /**
@@ -35,24 +35,32 @@
  *
  * @return singleton instance
  */
--(void)persistImage:(LensAssetImageWrapper*)image;
+-(void)persistImage:(LensAssetImageWrapper*)image removeFromCache:(BOOL)remove;
 
 /**
  * retrieves image intelligently from cache or from uiimage cache or from file system 
  * corrects positioning intelligently if it is being accessed too much
  * @author Geoff MacDonald
  *
- * @return singleton instance
+ * @return UIImage if immediately available
  */
--(UIImage*)retrieveImage:(NSString*)filename;
+-(UIImage*)retrieveImage:(NSString*)filename withAsset:(NSManagedObjectID*)assetId;
 
+-(UIImage*)retrieveIcon:(NSString*)filename withPost:(NSManagedObjectID*)postId;
 
--(NSString*)imageDirectory;
-
--(UIImage *) loadImage:(NSString *)fileName ofType:(NSString *)extension;
+/**
+ * retrieves image intelligently from cache or from uiimage cache or from file system
+ * corrects positioning intelligently if it is being accessed too much
+ * @author Geoff MacDonald
+ *
+ * @param uiimage to save
+ * @param filename without ext
+ * @param and extension
+ */
 -(void)saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension;
--(UIImage *) getImageFromURL:(NSString *)fileURL;
--(NSData *) getImageDataFromURL:(NSString *)fileURL;
 
+//-(NSString*)imageDirectory;
+
+//-(UIImage *) loadImage:(NSString *)fileName ofType:(NSString *)extension;
 
 @end

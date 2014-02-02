@@ -8,15 +8,16 @@
 
 #import "LensImageCache.h"
 #import "LensAppDelegate.h"
+#import "LensNetworkController.h"
 
 @implementation LensImageCache
-
 
 -(instancetype)init{
     
     if(self =[super init]){
         //config
         [self setCountLimit:100];
+        [self setDelegate:self];
     }
     return self;
 }
@@ -27,29 +28,56 @@
     [self setObject:image forKey:key];
 }
 
-
--(void)persistImage:(LensAssetImageWrapper*)image{
+-(void)persistImage:(LensAssetImageWrapper*)image removeFromCache:(BOOL)remove{
     
     [self saveImage:(UIImage*)image withFileName:image.intendedName ofType:image.extension];
     
     //purge from cache
-    [self removeObjectForKey:image.intendedName];
+    if(remove)
+        [self removeObjectForKey:image.intendedName];
 }
 
-
--(UIImage*)retrieveImage:(NSString*)filename{
+-(UIImage*)retrieveImage:(NSString*)filename withAsset:(NSManagedObjectID*)assetId{
     
     //try cache
     LensAssetImageWrapper * image = [self objectForKey:filename];
     if(!image){
         //try UIImage cache
         UIImage * uiImage = [UIImage imageNamed:filename];
-        if(!uiImage)
+        if(!uiImage){
+            //launch request to get it
+            [[LensNetworkController sharedNetwork] getImageForAsset:assetId withPriority:NSOperationQueuePriorityHigh];
+            //return nothing immediately
             return nil;
-        else
+        }
+        else{
             return uiImage;
+        }
     } else {
-        return (UIImage*)image;
+        //increments count
+        return image.image;
+    }
+}
+
+-(UIImage*)retrieveIcon:(NSString*)filename withPost:(NSManagedObjectID*)postId{
+    
+    //try cache
+    LensAssetImageWrapper * image = [self objectForKey:filename];
+    if(!image){
+        //try UIImage cache
+        UIImage * uiImage = [UIImage imageNamed:filename];
+        if(!uiImage){
+            //launch request to get it
+            [[LensNetworkController sharedNetwork] getIconForPost:postId];
+            //return nothing immediately
+            return nil;
+        }
+        else{
+            return uiImage;
+        }
+    } else {
+        //increments count
+        return image.image;
     }
 }
 
@@ -87,6 +115,22 @@
         [[NSFileManager defaultManager] createDirectoryAtPath:result withIntermediateDirectories:NO attributes:nil error:nil]; //Create folder
     
     return result;
+}
+
+#pragma mark NSCacheDelegate
+
+-(void)cache:(NSCache *)cache willEvictObject:(id)obj{
+    
+    //if evicted image should be saved, save it to file
+    LensAssetImageWrapper * asset = obj;
+    
+    //look up associated asset
+    if(asset){
+        if(asset.getCount > 3){
+            //persist
+            [self persistImage:asset removeFromCache:NO];
+        }
+    }
 }
 
 @end
