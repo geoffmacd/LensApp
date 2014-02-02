@@ -59,6 +59,7 @@
  */
 -(void)saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension;
 
+-(void)persistAndFlush;
 //-(NSString*)imageDirectory;
 
 //-(UIImage *) loadImage:(NSString *)fileName ofType:(NSString *)extension;

@@ -9,6 +9,8 @@
 #import "LensImageCache.h"
 #import "LensAppDelegate.h"
 #import "LensNetworkController.h"
+#import "LensAsset.h"
+
 
 @implementation LensImageCache
 
@@ -117,14 +119,46 @@
     return result;
 }
 
+-(void)persistAndFlush{
+    //cannot enumerate assets, pull array of assets and see what has not been saved
+    
+    LensAppDelegate * app = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext * context = [app threadContext];
+    
+    NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Asset"];
+    NSError * error;
+    NSArray * assets = [context executeFetchRequest:req error:&error];
+    if(!error && [assets count]){
+        //enumerate assets
+        [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            LensAsset * asset = obj;
+            LensAssetImageWrapper * wrapper;
+            if((wrapper = [self objectForKey:asset.filename])){
+                //still in cache check if should go to disk and then be used by uiimage cache later
+                if(wrapper.getCount > 3 || [self remainingFreeObjectSpace]){
+                    [self persistImage:wrapper removeFromCache:YES];
+                }
+            }
+        }];
+    }
+    //let cache die naturally
+}
+
+-(NSInteger)remainingFreeObjectSpace{
+    
+    NSError * error;
+    NSArray * files =[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self imageDirectory] error:&error];
+    
+    return 200 - [files count];
+}
+         
+
 #pragma mark NSCacheDelegate
 
 -(void)cache:(NSCache *)cache willEvictObject:(id)obj{
     
     //if evicted image should be saved, save it to file
     LensAssetImageWrapper * asset = obj;
-    
-    //look up associated asset
     if(asset){
         if(asset.getCount > 3){
             //persist
