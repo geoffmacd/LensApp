@@ -13,11 +13,11 @@
 @property NSManagedObjectID * assetId;
 @property (copy) NSString * intendedName;
 @property (copy) NSString * extension;
-@property BOOL shouldPersist;
+@property BOOL isPersisted;
 @property BOOL isIcon;
 @property NSInteger getCount;
 
-@property UIImage * image;
+@property (nonatomic) UIImage * image;
 
 -(instancetype)initWithName:(NSString*)fileName assetId:(NSManagedObjectID*)assetId;
 -(BOOL) getImageFromURL:(NSString *)fileURL;

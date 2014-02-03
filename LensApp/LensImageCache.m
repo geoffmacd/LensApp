@@ -9,6 +9,7 @@
 #import "LensImageCache.h"
 #import "LensAppDelegate.h"
 #import "LensNetworkController.h"
+#import "LensPost.h"
 #import "LensAsset.h"
 
 
@@ -44,8 +45,8 @@
     //try cache
     LensAssetImageWrapper * image = [self objectForKey:filename];
     if(!image){
-        //try UIImage cache
-        UIImage * uiImage = [UIImage imageNamed:filename];
+        //try file system, do not save to cache
+        UIImage * uiImage = [UIImage imageWithContentsOfFile:filename];
         if(!uiImage){
             //launch request to get it
             [[LensNetworkController sharedNetwork] getImageForAsset:assetId withPriority:NSOperationQueuePriorityHigh];
@@ -53,6 +54,10 @@
             return nil;
         }
         else{
+            //create wrapper and cache
+            LensAssetImageWrapper * wrapper = [[LensAssetImageWrapper alloc] initWithName:filename assetId:assetId];
+            [wrapper setIsPersisted:YES];
+            [self cacheImage:wrapper];
             return uiImage;
         }
     } else {
@@ -66,8 +71,8 @@
     //try cache
     LensAssetImageWrapper * image = [self objectForKey:filename];
     if(!image){
-        //try UIImage cache
-        UIImage * uiImage = [UIImage imageNamed:filename];
+        //try file system, do not save to cache
+        UIImage * uiImage = [UIImage imageWithContentsOfFile:filename];
         if(!uiImage){
             //launch request to get it
             [[LensNetworkController sharedNetwork] getIconForPost:postId];
@@ -75,6 +80,10 @@
             return nil;
         }
         else{
+            //create wrapper and cache
+            LensAssetImageWrapper * wrapper = [[LensAssetImageWrapper alloc] initWithName:filename assetId:nil];
+            [wrapper setIsPersisted:YES];
+            [self cacheImage:wrapper];
             return uiImage;
         }
     } else {
@@ -135,9 +144,23 @@
             LensAssetImageWrapper * wrapper;
             if((wrapper = [self objectForKey:asset.filename])){
                 //still in cache check if should go to disk and then be used by uiimage cache later
-                if(wrapper.getCount > 3 || [self remainingFreeObjectSpace]){
+                if(!wrapper.isPersisted && (wrapper.getCount > 3 || [self remainingFreeObjectSpace])){
                     [self persistImage:wrapper removeFromCache:YES];
                 }
+            }
+        }];
+    }
+    
+    NSFetchRequest * postreq = [[NSFetchRequest alloc] initWithEntityName:@"Post"];
+    error = nil;
+    NSArray * posts = [context executeFetchRequest:postreq error:&error];
+    if(!error && [posts count]){
+        //enumerate assets
+        [posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            LensPost * post = obj;
+            LensAssetImageWrapper * wrapper;
+            if((wrapper = [self objectForKey:post.iconFile])){
+                [self persistImage:wrapper removeFromCache:YES];
             }
         }];
     }

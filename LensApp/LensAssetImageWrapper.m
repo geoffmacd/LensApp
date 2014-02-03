@@ -12,7 +12,7 @@
 
 -(instancetype)initWithName:(NSString*)fileName assetId:(NSManagedObjectID*)assetId{
     if(self = [super init]){
-        _shouldPersist = NO;
+        _isPersisted = NO;
         _assetId = assetId;
         _extension = [fileName pathExtension];
         _intendedName = [[fileName stringByDeletingPathExtension] lastPathComponent];
