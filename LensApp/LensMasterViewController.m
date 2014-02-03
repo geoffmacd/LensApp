@@ -139,9 +139,9 @@
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
-        [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
-        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
-        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
+//        [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
+//        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
+//        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
         //        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         //
         //        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
@@ -160,9 +160,9 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
-        [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
-        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
-        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
+//        [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
+//        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
+//        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
 //        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 //        
 //        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];

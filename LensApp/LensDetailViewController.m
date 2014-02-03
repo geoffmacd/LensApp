@@ -45,7 +45,7 @@
     [self configureView];
     
     UINavigationItem * title = [[UINavigationItem alloc] init];
-    UIBarButtonItem * custom = [[UIBarButtonItem alloc] initWithImage:[UIImage lensIconNamed:self.iconName withPost:nil] style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem * custom = [[UIBarButtonItem alloc] initWithImage:[UIImage lensIconNamed:self.iconName withPost:self.postId] style:UIBarButtonItemStylePlain target:nil action:nil];
     [title setLeftBarButtonItem:custom];
 }
 

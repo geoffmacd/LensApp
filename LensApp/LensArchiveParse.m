@@ -104,7 +104,7 @@
     //save to context
     [self saveContext];
     
-    //get assets
+    //get post stories
     [newPosts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         LensPost * curPost = obj;
         [[LensNetworkController sharedNetwork] getStoryForPost:curPost.objectID];

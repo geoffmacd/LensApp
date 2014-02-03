@@ -19,6 +19,7 @@
 #import "LensPost.h"
 #import "LensStory.h"
 #import "LensAsset.h"
+#import "UIImage+UILensImage.h"
 
 @implementation LensNetworkController
 
@@ -200,14 +201,19 @@
         
         NSString * url = [curAsset imageUrl];
         NSString * filename = [url lastPathComponent];
-        
+    
         LensAssetImageWrapper * imagewrap = [[LensAssetImageWrapper alloc] initWithName:filename assetId:assetId];
-        //either ensure it exists or else retrieve it
-        if([_imageCache retrieveImage:filename withAsset:assetId doNotRequest:YES] || [imagewrap getImageFromURL:url]){
-            //save image with names
+        UIImage * fileSystemImage = [_imageCache retrieveImage:filename withAsset:assetId doNotRequest:YES];
+        
+        if(fileSystemImage){
+            //set it manually from file system
+            imagewrap.image = fileSystemImage;
             [_imageCache cacheImage:imagewrap];
             curAsset.filename = filename;
-            
+            [self saveContext:newContext];
+        } else if ([imagewrap getImageFromURL:url]){
+            [_imageCache cacheImage:imagewrap];
+            curAsset.filename = filename;
             [self saveContext:newContext];
         }
     }];
@@ -226,13 +232,22 @@
         NSString * filename = [url lastPathComponent];
                 
         LensAssetImageWrapper * imagewrap = [[LensAssetImageWrapper alloc] initWithName:filename assetId:nil];
-        //either ensure it exists or else retrieve it
-        if([_imageCache retrieveIcon:filename withPost:postId doNotRequest:YES] || [imagewrap getImageFromURL:url]){
-            //save image with names
+        UIImage * fileSystemImage = [_imageCache retrieveIcon:filename withPost:postId doNotRequest:YES];
+        
+        if(fileSystemImage){
+            //set it manually from file system
+            imagewrap.image = fileSystemImage;
             [_imageCache cacheImage:imagewrap];
             post.iconFile = filename;
-            
             [self saveContext:newContext];
+        } else if ([imagewrap getImageFromURL:url]){
+            [_imageCache cacheImage:imagewrap];
+            post.iconFile = filename;
+            [self saveContext:newContext];
+        }
+        
+        //either ensure it exists or else retrieve it
+        if([imagewrap getImageFromURL:url]){
         }
     }];
     [_queue addOperation:op];
