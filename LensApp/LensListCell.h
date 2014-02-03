@@ -14,12 +14,14 @@
 
 @interface LensListCell : UITableViewCell
 
-@property LensPost * post;
+@property NSManagedObjectID * postId;
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *excerptLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+
+-(void)configureCellForPost:(LensPost*)post;
 
 @end

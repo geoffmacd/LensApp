@@ -9,6 +9,7 @@
 #import "LensDetailViewController.h"
 
 #import "LensStory.h"
+#import "UIImage+UILensImage.h"
 
 @interface LensDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -42,6 +43,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self configureView];
+    
+    UINavigationItem * title = [[UINavigationItem alloc] init];
+    UIBarButtonItem * custom = [[UIBarButtonItem alloc] initWithImage:[UIImage lensIconNamed:self.iconName withPost:nil] style:UIBarButtonItemStylePlain target:nil action:nil];
+    [title setLeftBarButtonItem:custom];
 }
 
 - (void)didReceiveMemoryWarning

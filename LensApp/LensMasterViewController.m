@@ -11,6 +11,9 @@
 #import "LensDetailViewController.h"
 #import "LensNetworkController.h"
 #import "LensStory.h"
+#import "LensBlogCell.h"
+#import "LensListCell.h"
+#import "LensSlideshowViewController.h"
 
 @interface LensMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -43,17 +46,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+
     self.detailViewController = (LensDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     //observe persistence changes
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(contextWasSaved:)
                                                  name:NSManagedObjectContextDidSaveNotification object:nil];
+    
+    listMode = YES;
+    
+    if(listMode)
+       [self.tableView setRowHeight:100];
+    
+    //actually breaks the cells
+    //register cell classes
+//    [self.tableView registerClass:[LensBlogCell class] forCellReuseIdentifier:@"LensBlogCell"];
     
 //    [[LensNetworkController sharedNetwork] getCurrentPosts];
 }
@@ -62,37 +71,13 @@
     
     //merge
     [self.managedObjectContext performSelectorOnMainThread:@selector(mergeChangesFromContextDidSaveNotification:) withObject:notification waitUntilDone:NO];
-    
-//    NSError * error = nil;
-//    NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Post"];
-//    NSArray * posts = [self.managedObjectContext executeFetchRequest:req error:&error];
+
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)insertNewObject:(id)sender
-{
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    LensPost * newPost = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newPost setValue:[NSDate date] forKey:@"date"];
-    newPost.title = @"random title";
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-         // Replace this implementation with code to handle the error appropriately.
-         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
 }
 
 #pragma mark - Table View
@@ -110,7 +95,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell;
+    
+    if(!listMode)
+        cell = [tableView dequeueReusableCellWithIdentifier:@"LensBlogCell" forIndexPath:indexPath];
+    else
+        cell = [tableView dequeueReusableCellWithIdentifier:@"LensListCell" forIndexPath:indexPath];
+//    LensBlogCell * cell = [tableView dequeueReusableCellWithIdentifier:@"LensBlogCell"];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -181,6 +172,8 @@
         
         
         [[segue destinationViewController] setHtml:post.story.htmlContent];
+        [[segue destinationViewController] setPostId:post.objectID];
+        [[segue destinationViewController] setIconName:[post.iconUrl lastPathComponent] ];
     }
 }
 
@@ -285,9 +278,23 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"title"] description];
-    cell.detailTextLabel.text = [[object valueForKey:@"date"] description];
+    if(!listMode)
+        [self configureBlogCell:(LensBlogCell *)cell atIndexPath:indexPath];
+    else
+        [self configureListCell:(LensListCell *)cell atIndexPath:indexPath];
 }
 
+- (void)configureBlogCell:(LensBlogCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    LensPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [cell configureCellForPost:post];
+}
+
+- (void)configureListCell:(LensListCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    LensPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [cell configureCellForPost:post];
+}
 @end

@@ -11,6 +11,8 @@
 @interface LensDetailViewController : UIViewController <UISplitViewControllerDelegate,UIWebViewDelegate>
 
 @property (strong, nonatomic) NSString * html;
+@property (copy) NSString * iconName;
+@property (strong, nonatomic) NSManagedObjectID * postId;
 
 @property (weak, nonatomic) IBOutlet UIView *slideView;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;

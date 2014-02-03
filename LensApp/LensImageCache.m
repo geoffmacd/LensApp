@@ -77,7 +77,7 @@
 }
 
 -(UIImage*)retrieveIcon:(NSString*)filename withPost:(NSManagedObjectID*)postId doNotRequest:(BOOL)doNotRequest{
-    
+        
     //try cache
     LensAssetImageWrapper * image = [self objectForKey:filename];
     if(!image){
@@ -98,9 +98,14 @@
             [wrapper setIsPersisted:YES];
             wrapper.image = uiImage;
             [self cacheImage:wrapper];
+            
+            NSLog(@"retrieving filesystem icon: %@", filename);
             return uiImage;
         }
     } else {
+        
+        NSLog(@"retrieving cached icon: %@", filename);
+        
         //increments count
         return image.image;
     }

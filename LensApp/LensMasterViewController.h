@@ -13,11 +13,14 @@
 #import <CoreData/CoreData.h>
 #import "LensPost.h"
 
-@interface LensMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface LensMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>{
+    BOOL listMode;
+}
 
 @property (strong, nonatomic) LensDetailViewController *detailViewController;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 
 @end

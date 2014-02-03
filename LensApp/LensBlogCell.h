@@ -14,13 +14,13 @@
 
 @interface LensBlogCell : UITableViewCell
 
-@property LensPost * post;
-
-@property (weak, nonatomic) IBOutlet UIView *slideShowView;
+@property NSManagedObjectID * postId;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *excerptText;
+
+-(void)configureCellForPost:(LensPost*)post;
 
 @end
