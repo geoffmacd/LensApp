@@ -10,10 +10,8 @@
 
 #import "LensDetailViewController.h"
 #import "LensNetworkController.h"
-#import "LensImageCache.h"
-#import "UIImage+UILensImage.h"
+#import "LensStory.h"
 
-#import "LensAsset.h"
 @interface LensMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
@@ -151,8 +149,8 @@
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
         [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
-//        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
-//        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
+        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
+        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
         //        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         //
         //        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
@@ -172,8 +170,8 @@
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
         [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
-//        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
-//        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
+        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
+        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
 //        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 //        
 //        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
@@ -183,13 +181,6 @@
         
         
         [[segue destinationViewController] setHtml:post.story.htmlContent];
-        
-        LensAsset * asset = [post.assets firstObject];
-        
-        UIImage * image = [UIImage lensImageNamed:asset.filename withAsset:asset.objectID];
-        
-        if(image)
-            [[segue destinationViewController] setImage:image];
     }
 }
 
@@ -294,15 +285,9 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    LensPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    if([[post title] length] > 15)
-        cell.textLabel.text = [[post title] substringToIndex:15];
-    cell.textLabel.text = [post title];
-    
-    [cell.imageView setImage:[UIImage lensIconNamed:post.iconFile withPost:post.objectID]];
-    
-    cell.detailTextLabel.text = [[post date] description];
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [[object valueForKey:@"title"] description];
+    cell.detailTextLabel.text = [[object valueForKey:@"date"] description];
 }
 
 @end

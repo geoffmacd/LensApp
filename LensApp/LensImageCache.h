@@ -1,5 +1,5 @@
 //
-//  LensImage.h
+//  LensImageCache.h
 //  LensApp
 //
 //  Created by Xtreme Dev on 1/30/2014.

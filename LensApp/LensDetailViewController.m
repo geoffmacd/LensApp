@@ -8,7 +8,7 @@
 
 #import "LensDetailViewController.h"
 
-#import "LensImageCache.h"
+#import "LensStory.h"
 
 @interface LensDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -30,17 +30,11 @@
     }        
 }
 
--(void)setImage:(UIImage *)image{
-    _image = image;
-
-}
-
 - (void)configureView
 {
     // Update the user interface for the detail item.
 
     [self.webview loadHTMLString:self.html baseURL:nil];
-    [self.imageView setImage:_image];
 }
 
 - (void)viewDidLoad
