@@ -20,7 +20,6 @@
 @property (nonatomic, retain) NSString * storyUrl;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * iconFile;
-@property (nonatomic, retain) NSString * iconExtension;
 @property (nonatomic, retain) NSOrderedSet *assets;
 @property (nonatomic, retain) LensAuthor *author;
 @property (nonatomic, retain) LensStory *story;

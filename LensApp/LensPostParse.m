@@ -101,7 +101,7 @@
             
             [newPosts addObject:newPost];
         } else {
-            NSLog(@"already have this post, %@", title);
+//            NSLog(@"already have this post, %@", title);
         }
     }
     

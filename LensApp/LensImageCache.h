@@ -44,9 +44,9 @@
  *
  * @return UIImage if immediately available
  */
--(UIImage*)retrieveImage:(NSString*)filename withAsset:(NSManagedObjectID*)assetId;
+-(UIImage*)retrieveImage:(NSString*)filename withAsset:(NSManagedObjectID*)assetId doNotRequest:(BOOL)doNotRequest;
 
--(UIImage*)retrieveIcon:(NSString*)filename withPost:(NSManagedObjectID*)postId;
+-(UIImage*)retrieveIcon:(NSString*)filename withPost:(NSManagedObjectID*)postId doNotRequest:(BOOL)doNotRequest;
 
 /**
  * retrieves image intelligently from cache or from uiimage cache or from file system
@@ -57,11 +57,8 @@
  * @param filename without ext
  * @param and extension
  */
--(void)saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension;
+-(void)saveImage:(LensAssetImageWrapper*)wrapperToSave;
 
 -(void)persistAndFlush;
-//-(NSString*)imageDirectory;
-
-//-(UIImage *) loadImage:(NSString *)fileName ofType:(NSString *)extension;
 
 @end

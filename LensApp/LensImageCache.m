@@ -33,56 +33,70 @@
 
 -(void)persistImage:(LensAssetImageWrapper*)image removeFromCache:(BOOL)remove{
     
-    [self saveImage:(UIImage*)image withFileName:image.intendedName ofType:image.extension];
+    NSLog(@"persisting image: %@", image.intendedName);
+    [self saveImage:image];
     
     //purge from cache
     if(remove)
         [self removeObjectForKey:image.intendedName];
 }
 
--(UIImage*)retrieveImage:(NSString*)filename withAsset:(NSManagedObjectID*)assetId{
+-(UIImage*)retrieveImage:(NSString*)filename withAsset:(NSManagedObjectID*)assetId doNotRequest:(BOOL)doNotRequest{
     
     //try cache
     LensAssetImageWrapper * image = [self objectForKey:filename];
     if(!image){
         //try file system, do not save to cache
-        UIImage * uiImage = [UIImage imageWithContentsOfFile:filename];
-        if(!uiImage){
-            //launch request to get it
-            [[LensNetworkController sharedNetwork] getImageForAsset:assetId withPriority:NSOperationQueuePriorityHigh];
+        if(![[NSFileManager defaultManager] fileExistsAtPath:[[self imageDirectory] stringByAppendingPathComponent:filename]]){
+            if(!doNotRequest){
+                //launch request to get it
+                [[LensNetworkController sharedNetwork] getImageForAsset:assetId withPriority:NSOperationQueuePriorityHigh];
+                NSLog(@"retrieving image miss, fetch: %@", filename);
+            }
             //return nothing immediately
             return nil;
         }
         else{
+            UIImage * uiImage = [UIImage imageWithContentsOfFile:[[self imageDirectory] stringByAppendingPathComponent:filename]];
             //create wrapper and cache
             LensAssetImageWrapper * wrapper = [[LensAssetImageWrapper alloc] initWithName:filename assetId:assetId];
             [wrapper setIsPersisted:YES];
+            wrapper.image = uiImage;
             [self cacheImage:wrapper];
+            
+            NSLog(@"retrieving filesystem image: %@", filename);
             return uiImage;
         }
     } else {
+        
+        NSLog(@"retrieving cached image: %@", filename);
+        
         //increments count
         return image.image;
     }
 }
 
--(UIImage*)retrieveIcon:(NSString*)filename withPost:(NSManagedObjectID*)postId{
+-(UIImage*)retrieveIcon:(NSString*)filename withPost:(NSManagedObjectID*)postId doNotRequest:(BOOL)doNotRequest{
     
     //try cache
     LensAssetImageWrapper * image = [self objectForKey:filename];
     if(!image){
         //try file system, do not save to cache
-        UIImage * uiImage = [UIImage imageWithContentsOfFile:filename];
-        if(!uiImage){
-            //launch request to get it
-            [[LensNetworkController sharedNetwork] getIconForPost:postId];
+        if(![[NSFileManager defaultManager] fileExistsAtPath:[[self imageDirectory] stringByAppendingPathComponent:filename]]){
+            if(!doNotRequest){
+                //launch request to get it
+                [[LensNetworkController sharedNetwork] getIconForPost:postId];
+                NSLog(@"retrieving icon miss, fetch: %@", filename);
+            }
             //return nothing immediately
             return nil;
         }
         else{
             //create wrapper and cache
+            UIImage * uiImage = [UIImage imageWithContentsOfFile:[[self imageDirectory] stringByAppendingPathComponent:filename]];
             LensAssetImageWrapper * wrapper = [[LensAssetImageWrapper alloc] initWithName:filename assetId:nil];
             [wrapper setIsPersisted:YES];
+            wrapper.image = uiImage;
             [self cacheImage:wrapper];
             return uiImage;
         }
@@ -99,13 +113,20 @@
 //    return result;
 //}
 
--(void)saveImage:(UIImage *)image withFileName:(NSString *)imageName ofType:(NSString *)extension {
+-(void)saveImage:(LensAssetImageWrapper*)wrapperToSave {
+    
+    UIImage * image = wrapperToSave.image;
+    NSString * extension = wrapperToSave.extension;
+    NSString * filename = wrapperToSave.intendedName;
+    
+    //tell the asset it is persisted
+    wrapperToSave.isPersisted = YES;
     
     if ([[extension lowercaseString] isEqualToString:@"png"]) {
-        NSString * path = [[self imageDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"png"]];
+        NSString * path = [[self imageDirectory] stringByAppendingPathComponent:filename];
         [UIImagePNGRepresentation(image) writeToFile:path options:NSAtomicWrite error:nil];
     } else if ([[extension lowercaseString] isEqualToString:@"jpg"] || [[extension lowercaseString] isEqualToString:@"jpeg"]) {
-        NSString * path = [[self imageDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", imageName, @"jpg"]];
+        NSString * path = [[self imageDirectory] stringByAppendingPathComponent:filename];
         NSError * error;
         [UIImageJPEGRepresentation(image, 1.0) writeToFile:path options:NSAtomicWrite error:&error];
         if(error){
@@ -137,6 +158,7 @@
     NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Asset"];
     NSError * error;
     NSArray * assets = [context executeFetchRequest:req error:&error];
+    
     if(!error && [assets count]){
         //enumerate assets
         [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -160,7 +182,10 @@
             LensPost * post = obj;
             LensAssetImageWrapper * wrapper;
             if((wrapper = [self objectForKey:post.iconFile])){
-                [self persistImage:wrapper removeFromCache:YES];
+                //still in cache check if should go to disk and then be used by uiimage cache later
+                if(!wrapper.isPersisted && [self remainingFreeObjectSpace]){
+                    [self persistImage:wrapper removeFromCache:YES];
+                }
             }
         }];
     }
@@ -172,7 +197,7 @@
     NSError * error;
     NSArray * files =[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self imageDirectory] error:&error];
     
-    return 200 - [files count];
+    return ((200 - [files count]) > 0 ? YES: NO);
 }
          
 

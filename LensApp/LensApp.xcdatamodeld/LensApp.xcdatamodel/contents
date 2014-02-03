@@ -3,7 +3,6 @@
     <entity name="Asset" representedClassName="LensAsset" syncable="YES">
         <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="credit" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="extension" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,7 +17,6 @@
         <attribute name="assetUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="excerpt" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="iconExtension" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iconFile" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="iconUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="storyUrl" optional="YES" attributeType="String" syncable="YES"/>

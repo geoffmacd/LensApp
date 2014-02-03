@@ -163,31 +163,6 @@
     [task resume];
 }
 
--(void)getImageForAsset:(NSManagedObjectID*)assetId withPriority:(NSOperationQueuePriority)priority{
-    
-    NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^{
-        
-        LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
-        NSManagedObjectContext * newContext = [appDel threadContext];
-        LensAsset * curAsset = (LensAsset *)[newContext objectWithID:assetId];
-        
-        NSString * url = [curAsset imageUrl];
-        NSString * type = [url pathExtension];
-        NSString * filename = [[url stringByDeletingPathExtension] lastPathComponent];
-        
-        LensAssetImageWrapper * imagewrap = [[LensAssetImageWrapper alloc] initWithName:filename assetId:assetId];
-        if([imagewrap getImageFromURL:url]){
-            //save image with names
-            [_imageCache cacheImage:imagewrap];
-            curAsset.filename = filename;
-            curAsset.extension = type;
-            
-            [self saveContext:newContext];
-        }
-    }];
-    [_queue addOperation:op];
-}
-
 -(void)triggerRemainingAssets:(NSManagedObjectID*)postId{
     
     LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
@@ -215,6 +190,30 @@
     }
 }
 
+-(void)getImageForAsset:(NSManagedObjectID*)assetId withPriority:(NSOperationQueuePriority)priority{
+    
+    NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^{
+        
+        LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+        NSManagedObjectContext * newContext = [appDel threadContext];
+        LensAsset * curAsset = (LensAsset *)[newContext objectWithID:assetId];
+        
+        NSString * url = [curAsset imageUrl];
+        NSString * filename = [url lastPathComponent];
+        
+        LensAssetImageWrapper * imagewrap = [[LensAssetImageWrapper alloc] initWithName:filename assetId:assetId];
+        //either ensure it exists or else retrieve it
+        if([_imageCache retrieveImage:filename withAsset:assetId doNotRequest:YES] || [imagewrap getImageFromURL:url]){
+            //save image with names
+            [_imageCache cacheImage:imagewrap];
+            curAsset.filename = filename;
+            
+            [self saveContext:newContext];
+        }
+    }];
+    [_queue addOperation:op];
+}
+
 -(void)getIconForPost:(NSManagedObjectID*)postId{
     
     NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^{
@@ -224,16 +223,14 @@
         LensPost * post = (LensPost *)[newContext objectWithID:postId];
         
         NSString * url = [post iconUrl];
-        NSString * type = [url pathExtension];
-        NSString * filename = [[url stringByDeletingPathExtension] lastPathComponent];
-        
-        
+        NSString * filename = [url lastPathComponent];
+                
         LensAssetImageWrapper * imagewrap = [[LensAssetImageWrapper alloc] initWithName:filename assetId:nil];
-        if([imagewrap getImageFromURL:url]){
+        //either ensure it exists or else retrieve it
+        if([_imageCache retrieveIcon:filename withPost:postId doNotRequest:YES] || [imagewrap getImageFromURL:url]){
             //save image with names
             [_imageCache cacheImage:imagewrap];
             post.iconFile = filename;
-            post.iconExtension = type;
             
             [self saveContext:newContext];
         }
@@ -243,7 +240,7 @@
 
 -(void)saveContext:(NSManagedObjectContext*)context{
     
-    NSError * error;
+    NSError * error = nil;
     if (context != nil) {
         if ([context hasChanges]){
             if(![context save:&error]) {

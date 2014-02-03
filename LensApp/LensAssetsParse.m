@@ -68,6 +68,7 @@
                 newAsset.imageUrl = imageUrl;
                 newAsset.caption = [photo valueWithPath:kTagCaption];
                 newAsset.credit = [photo valueWithPath:kTagCredit];
+                newAsset.filename = [imageUrl lastPathComponent];
                 if(post){
                     //add to post
                     [newAssets addObject:newAsset];

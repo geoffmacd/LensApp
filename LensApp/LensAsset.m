@@ -18,7 +18,6 @@
 @dynamic imageUrl;
 @dynamic filename;
 @dynamic width;
-@dynamic extension;
 @dynamic post;
 
 @end

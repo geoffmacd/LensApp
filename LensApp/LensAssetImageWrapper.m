@@ -15,7 +15,7 @@
         _isPersisted = NO;
         _assetId = assetId;
         _extension = [fileName pathExtension];
-        _intendedName = [[fileName stringByDeletingPathExtension] lastPathComponent];
+        _intendedName = [fileName lastPathComponent];
         _isIcon = (assetId ? NO : YES);
         _getCount = 0;
     }

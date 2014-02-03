@@ -15,12 +15,12 @@
 
 +(UIImage*)lensImageNamed:(NSString*)filename withAsset:(NSManagedObjectID*)assetId{
     
-    return [[[LensNetworkController sharedNetwork] imageCache] retrieveImage:filename withAsset:assetId];
+    return [[[LensNetworkController sharedNetwork] imageCache] retrieveImage:filename withAsset:assetId doNotRequest:NO];
 }
 
 +(UIImage*)lensIconNamed:(NSString*)filename withPost:(NSManagedObjectID*)postId{
     
-    return [[[LensNetworkController sharedNetwork] imageCache] retrieveIcon:filename withPost:postId];
+    return [[[LensNetworkController sharedNetwork] imageCache] retrieveIcon:filename withPost:postId doNotRequest:NO];
 }
 
 @end

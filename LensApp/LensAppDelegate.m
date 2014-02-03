@@ -33,9 +33,18 @@
         LensMasterViewController *controller = (LensMasterViewController *)navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lowMemory:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+    
     return YES;
 }
-							
+
+-(void)lowMemory:(NSNotification *)notification{
+    
+    [[[LensNetworkController sharedNetwork] imageCache] persistAndFlush];
+    
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

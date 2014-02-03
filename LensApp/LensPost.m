@@ -22,7 +22,6 @@
 @dynamic storyUrl;
 @dynamic title;
 @dynamic iconFile;
-@dynamic iconExtension;
 @dynamic assets;
 @dynamic author;
 @dynamic story;
