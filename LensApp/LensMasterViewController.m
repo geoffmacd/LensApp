@@ -13,7 +13,7 @@
 #import "LensStory.h"
 #import "LensBlogCell.h"
 #import "LensListCell.h"
-#import "LensSlideshowViewController.h"
+#import "LensSlideView.h"
 
 @interface LensMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -60,7 +60,7 @@
                                                  name:@"refresh" object:nil];
     
     
-    listMode = YES;
+    listMode = NO;
     
     
     if(listMode)
