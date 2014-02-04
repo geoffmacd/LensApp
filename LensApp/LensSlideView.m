@@ -72,7 +72,7 @@
 
 -(void)configure{
     //add slider of same frame
-    UIScrollView * scroll = [[UIScrollView alloc] initWithFrame:self.frame];
+    UIScrollView * scroll = [[UIScrollView alloc] initWithFrame:self.bounds];
     _scroll = scroll;
     [_scroll setDelegate:self];
     [self addSubview:scroll];

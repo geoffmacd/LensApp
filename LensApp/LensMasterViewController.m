@@ -132,43 +132,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        
-//        [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
-//        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
-//        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
-        //        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        //
-        //        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-        //        [offsetComponents setYear:-1];
-        //
-        //        [[LensNetworkController sharedNetwork] getArchivePosts:[NSDate date] withEnd:[gregorian dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0]];
-        
-        LensStory * story = post.story;
-        self.detailViewController.html = story.htmlContent;
+        [self.detailViewController setthis:post];
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
-//        [[LensNetworkController sharedNetwork] getStoryForPost:post.objectID];
-//        [[LensNetworkController sharedNetwork] triggerRemainingAssets:post.objectID];
-//        [[LensNetworkController sharedNetwork] getIconForPost:post.objectID];
-//        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//        
-//        NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
-//        [offsetComponents setYear:-1];
-//
-//        [[LensNetworkController sharedNetwork] getArchivePosts:[NSDate date] withEnd:[gregorian dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0]];
-        
-        
-        [[segue destinationViewController] setHtml:post.story.htmlContent];
-        [[segue destinationViewController] setPostId:post.objectID];
-        [[segue destinationViewController] setIconName:[post.iconUrl lastPathComponent] ];
+        [[segue destinationViewController] setthis:post];
     }
 }
 

@@ -34,7 +34,8 @@
     [self setObject:image forKey:key];
     
     //notify view controllers image is available
-    [[NSNotificationCenter defaultCenter] postNotificationName:image.intendedName object:self userInfo:@{@"assetId":image.assetId}];
+    if(image.assetId)   //only images not icons
+        [[NSNotificationCenter defaultCenter] postNotificationName:image.intendedName object:self userInfo:@{@"assetId":image.assetId}];
 }
 
 -(void)persistImage:(LensAssetImageWrapper*)image removeFromCache:(BOOL)remove{

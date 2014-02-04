@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "LensSlideView.h"
+#import "LensPost.h"
+
 @interface LensDetailViewController : UIViewController <UISplitViewControllerDelegate,UIWebViewDelegate>
 
-@property (strong, nonatomic) NSString * html;
-@property (copy) NSString * iconName;
-@property (strong, nonatomic) NSManagedObjectID * postId;
+@property LensPost * post;
 
-@property (weak, nonatomic) IBOutlet UIView *slideView;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
+@property (weak, nonatomic) IBOutlet LensSlideView *slideView;
+
+-(void)setthis:(LensPost*)post;
+
 @end

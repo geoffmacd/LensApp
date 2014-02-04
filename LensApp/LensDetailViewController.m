@@ -10,6 +10,7 @@
 
 #import "LensStory.h"
 #import "UIImage+UILensImage.h"
+#import "LensAppDelegate.h"
 
 @interface LensDetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -20,23 +21,24 @@
 
 #pragma mark - Managing the detail item
 
--(void)setHtml:(NSString *)html
-{
+-(void)setthis:(LensPost*)post{
     // Update the view.
-    _html = html;
+    _post = post;
     [self configureView];
     
-
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
+    }
 }
 
 - (void)configureView
 {
-    // Update the user interface for the detail item.
-
-    [self.webview loadHTMLString:self.html baseURL:nil];
+    // Update the user interface for the post
+    LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+    NSManagedObjectContext * newContext = [appDel threadContext];
+    
+    [self.slideView setPost:self.post withContext:newContext];
+    [self.webview loadHTMLString:self.post.story.htmlContent baseURL:nil];
 }
 
 - (void)viewDidLoad
@@ -46,7 +48,7 @@
     [self configureView];
     
     UINavigationItem * title = [[UINavigationItem alloc] init];
-    UIBarButtonItem * custom = [[UIBarButtonItem alloc] initWithImage:[UIImage lensIconNamed:self.iconName withPost:self.postId] style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem * custom = [[UIBarButtonItem alloc] initWithImage:[UIImage lensIconNamed:self.post.iconFile withPost:self.post.objectID] style:UIBarButtonItemStylePlain target:nil action:nil];
     [title setLeftBarButtonItem:custom];
 }
 
