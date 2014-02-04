@@ -65,9 +65,9 @@
     
     if(listMode)
        [self.tableView setRowHeight:110];
+    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
     UIRefreshControl * refresh = [[UIRefreshControl alloc] init];
-//    refresh.attributedTitle = @"Loading more blog posts";
     self.refreshControl = refresh;
     [refresh addTarget:self action:@selector(getArchives) forControlEvents:UIControlEventValueChanged];
     

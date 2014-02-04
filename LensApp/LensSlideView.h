@@ -11,19 +11,26 @@
 #import "LensPost.h"
 #import "LensAsset.h"
 
+#define kXpadding       10
+#define kAssetHeight    200
+#define kcaptionHeight  40
 
-@interface LensSlideView : UIView{
+
+@interface LensSlideView : UIView <UIScrollViewDelegate> {
     CGFloat assetWidth;
     CGFloat assetHeight;
     
     CGFloat captionHeight;
     
     CGFloat xPadding;
+    NSInteger limitSlides;
+    CGFloat maxScrolledX;
 }
 
 @property (weak) UIScrollView * scroll;
 @property NSArray * assets;
 @property LensPost * post;
+@property (strong) NSMutableDictionary * slideDict;
 
 -(void)setPost:(LensPost *)post withContext:(NSManagedObjectContext*)context;
 @end

@@ -19,16 +19,22 @@
     
     if(self =[super init]){
         //config
-        [self setCountLimit:300];
+//        [self setCountLimit:300];
         [self setDelegate:self];
+        count = 0;
     }
     return self;
 }
 
 -(void)cacheImage:(LensAssetImageWrapper*)image{
     
+    //if tried before
+    
     NSString * key = image.intendedName;
     [self setObject:image forKey:key];
+    
+    //notify view controllers image is available
+    [[NSNotificationCenter defaultCenter] postNotificationName:image.intendedName object:self userInfo:@{@"assetId":image.assetId}];
 }
 
 -(void)persistImage:(LensAssetImageWrapper*)image removeFromCache:(BOOL)remove{
@@ -208,6 +214,10 @@
     
     return ((200 - [files count]) > 0 ? YES: NO);
 }
+
+-(void)evictBottom{
+    [self removeAllObjects];
+}
          
 
 #pragma mark NSCacheDelegate
@@ -217,12 +227,13 @@
     
     //if evicted image should be saved, save it to file
     LensAssetImageWrapper * wrapper = obj;
-    NSLog(@"evicting image : %@", wrapper.intendedName);
-    if(wrapper){
-
-            //persist
-            [self persistImage:wrapper removeFromCache:NO];
+    if(!wrapper.isPersisted){
+        NSLog(@"evicting image from cache to filesystem: %@", wrapper.intendedName);
+        //persist
+        [self persistImage:wrapper removeFromCache:NO];
         
+    } else{
+        NSLog(@"evicting image from cache already persisted: %@", wrapper.intendedName);
     }
 }
 

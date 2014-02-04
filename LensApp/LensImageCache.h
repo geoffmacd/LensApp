@@ -10,7 +10,9 @@
 
 #import "LensAssetImageWrapper.h"
 
-@interface LensImageCache : NSCache <NSCacheDelegate>
+@interface LensImageCache : NSCache <NSCacheDelegate>{
+    NSInteger count;
+}
 
 
 /**
