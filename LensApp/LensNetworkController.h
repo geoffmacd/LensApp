@@ -19,7 +19,8 @@
 @property NSOperationQueue * queue;
 @property NSURLSession * session;
 @property LensImageCache * imageCache;
-
+@property NSDate * latestDate;
+@property NSDate * oldestDate;
 
 -(instancetype)init;
 
@@ -46,7 +47,7 @@
  * @param NSDate ending date
  */
 -(void)getArchivePosts:(NSDate *)startDate withEnd:(NSDate *)endDate;
-
+-(void)getArchivePosts;
 /**
  * requests and parses html content for post and formats correctly for uiwebview load in LensStory
  * @author Geoff MacDonald

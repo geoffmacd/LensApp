@@ -19,7 +19,7 @@
     
     if(self =[super init]){
         //config
-        [self setCountLimit:100];
+        [self setCountLimit:300];
         [self setDelegate:self];
     }
     return self;
@@ -33,8 +33,12 @@
 
 -(void)persistImage:(LensAssetImageWrapper*)image removeFromCache:(BOOL)remove{
     
-    NSLog(@"persisting image: %@", image.intendedName);
-    [self saveImage:image];
+    //do not resave if already exits on filesystem
+    if(!image.isPersisted){
+        
+        NSLog(@"persisting image: %@", image.intendedName);
+        [self saveImage:image];
+    }
     
     //purge from cache
     if(remove)
@@ -171,7 +175,7 @@
             LensAssetImageWrapper * wrapper;
             if((wrapper = [self objectForKey:asset.filename])){
                 //still in cache check if should go to disk and then be used by uiimage cache later
-                if(!wrapper.isPersisted && (wrapper.getCount > 3 || [self remainingFreeObjectSpace])){
+                if(wrapper.getCount > 3 || [self remainingFreeObjectSpace]){
                     [self persistImage:wrapper removeFromCache:YES];
                 }
             }
@@ -210,13 +214,15 @@
 
 -(void)cache:(NSCache *)cache willEvictObject:(id)obj{
     
+    
     //if evicted image should be saved, save it to file
-    LensAssetImageWrapper * asset = obj;
-    if(asset){
-        if(asset.getCount > 3){
+    LensAssetImageWrapper * wrapper = obj;
+    NSLog(@"evicting image : %@", wrapper.intendedName);
+    if(wrapper){
+
             //persist
-            [self persistImage:asset removeFromCache:NO];
-        }
+            [self persistImage:wrapper removeFromCache:NO];
+        
     }
 }
 

@@ -54,6 +54,27 @@
 
 -(void)contextWasSaved:(NSNotification*)notification{
     
+    //update oldest date
+    
+//    LensAppDelegate * appDel = [UIApplication sharedApplication].delegate;
+//    NSManagedObjectContext * newContext = [appDel threadContext];
+//    
+//    //fetch posts with same title
+//    NSFetchRequest * req = [[NSFetchRequest alloc] initWithEntityName:@"Post"];
+//    
+//    NSError * error = nil;
+//    NSArray * matches = [newContext executeFetchRequest:req error:&error];
+//    if(!error && [matches count]){
+//        [matches enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//           
+//            LensPost * post = obj;
+//            if([post.date timeIntervalSinceDate:_oldestDate] < 0)
+//                _oldestDate = post.date;
+//        }];
+//        
+//    } else {
+//        _oldestDate = [NSDate date];
+//    }
 }
 
 -(void)getCurrentPosts{
@@ -70,10 +91,33 @@
             LensPostParse * parser = [[LensPostParse alloc] initWithData:data];
             [parser setQueuePriority:NSOperationQueuePriorityHigh];
             [_queue addOperation:parser];
+            
+            //set latest date, but not oldest date
+            _latestDate = [NSDate date];
+            if(!_oldestDate){
+                NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+                NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+                [offsetComponents setWeek:-2];
+                NSDate * newOld = [gregorian dateByAddingComponents:offsetComponents toDate:[NSDate date] options:0];
+                _oldestDate = newOld;
+            }
         }
     }];
     //must start
     [task resume];
+}
+
+-(void)getArchivePosts{
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    //get 1 more month
+    [offsetComponents setMonth:-1];
+    NSDate * newOld = [gregorian dateByAddingComponents:offsetComponents toDate:_oldestDate options:0];
+
+    [self getArchivePosts:_oldestDate withEnd:newOld];
+    
+    _oldestDate = newOld;
 }
 
 -(void)getArchivePosts:(NSDate *)startDate withEnd:(NSDate *)endDate{
@@ -114,7 +158,29 @@
             [task resume];
         }
     }
+    
+//    NSBlockOperation * op = [NSBlockOperation blockOperationWithBlock:^{
+//        
+//        //wait until all the assets are finished
+//        [_queue waitUntilAllOperationsAreFinished];
+//        NSLog(@"finished");
+//        
+//    }];
+//    [_queue addOperation:op];
+    
+    [self performSelectorOnMainThread:@selector(refreshResult)
+                           withObject:nil
+                        waitUntilDone:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil];
 }
+
+-(void)refreshResult{
+    [_queue waitUntilAllOperationsAreFinished];
+    
+    
+}
+
+
 
 -(void)getStoryForPost:(NSManagedObjectID *)postId{
     
@@ -254,7 +320,7 @@
 }
 
 -(void)saveContext:(NSManagedObjectContext*)context{
-    
+
     NSError * error = nil;
     if (context != nil) {
         if ([context hasChanges]){

@@ -25,6 +25,7 @@
     // Update the view.
     _html = html;
     [self configureView];
+    
 
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
