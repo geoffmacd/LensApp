@@ -46,7 +46,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [self.navigationController.view setTintColor:[UIColor redColor]];
+    
+    UIBarButtonItem *changeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(changeFormat)];
+    self.navigationItem.rightBarButtonItem = changeButton;
+    
 
     self.detailViewController = (LensDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
@@ -59,18 +63,25 @@
                                              selector:@selector(refreshComplete)
                                                  name:@"refresh" object:nil];
     
+    listMode = YES;
+    [self changeFormat];
     
-    listMode = NO;
     
-    
-    if(listMode)
-       [self.tableView setRowHeight:110];
     [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     
-    UIRefreshControl * refresh = [[UIRefreshControl alloc] init];
-    self.refreshControl = refresh;
-    [refresh addTarget:self action:@selector(getArchives) forControlEvents:UIControlEventValueChanged];
+//    UIRefreshControl * refresh = [[UIRefreshControl alloc] init];
+//    self.refreshControl = refresh;
+//    [refresh addTarget:self action:@selector(getArchives) forControlEvents:UIControlEventValueChanged];
     
+}
+
+-(void)changeFormat{
+    listMode = !listMode;
+    if(listMode)
+        [self.tableView setRowHeight:100];
+    else
+        [self.tableView setRowHeight:280];
+    [self.tableView reloadData];
 }
 
 -(void)getArchives{

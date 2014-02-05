@@ -181,7 +181,7 @@
 -(void)sizeSlider{
     
     xPadding = 10;
-    assetWidth = [[[UIApplication sharedApplication] keyWindow] frame].size.width - (2 * xPadding);
+    assetWidth = self.frame.size.width - (2 * xPadding);
     assetHeight = 200;
     captionHeight = 30;
     
@@ -243,16 +243,6 @@
     //animate scroll to discrete target
     [scrollView scrollRectToVisible:target animated:YES];
     
-}
-
--(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
-    
-    if([gestureRecognizer class] == [UISwipeGestureRecognizer class]){
-        
-        
-        return YES;
-    }
-    return NO;
 }
 
 

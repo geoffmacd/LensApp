@@ -14,14 +14,25 @@
 @implementation LensListCell
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
-    if(self = [super init]){
+    if(self = [super initWithCoder:aDecoder]){
+        [self configure];
+    }
+    return self;
+}
+
+-(id)initWithFrame:(CGRect)frame{
+    if(self = [super initWithFrame:frame]){
         [self configure];
     }
     return self;
 }
 
 -(void)configure{
-
+    
+    
+    _titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    _authorLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+    _dateLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
 }
 
 -(void)configureCellForPost:(LensPost*)post{
@@ -33,6 +44,7 @@
     [self.authorLabel setText:post.author.name];
     
     //must use last path component because file name is not saved until request
+    self.iconView.contentMode = UIViewContentModeScaleAspectFit;
     [self.iconView setImage:[UIImage lensIconNamed:[post.iconUrl lastPathComponent] withPost:_postId]];
     
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];

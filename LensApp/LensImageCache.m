@@ -30,6 +30,8 @@
     
     //if tried before
     
+    count++;
+    
     NSString * key = image.intendedName;
     [self setObject:image forKey:key];
     
@@ -217,6 +219,7 @@
 }
 
 -(void)evictBottom{
+    count = 0;
     [self removeAllObjects];
 }
          
@@ -225,6 +228,7 @@
 
 -(void)cache:(NSCache *)cache willEvictObject:(id)obj{
     
+    count--;
     
     //if evicted image should be saved, save it to file
     LensAssetImageWrapper * wrapper = obj;

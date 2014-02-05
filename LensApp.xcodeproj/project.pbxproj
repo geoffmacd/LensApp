@@ -23,6 +23,7 @@
 		C36A3BF9189ADBC0002B900E /* LensTag.m in Sources */ = {isa = PBXBuildFile; fileRef = C36A3BF8189ADBC0002B900E /* LensTag.m */; };
 		C36A3BFC189ADBC0002B900E /* LensAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = C36A3BFB189ADBC0002B900E /* LensAuthor.m */; };
 		C37B07AA189808C300E99727 /* LensNetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37B07A9189808C300E99727 /* LensNetworkController.m */; };
+		C38480BF18A2E392001D174F /* lens_main.png in Resources */ = {isa = PBXBuildFile; fileRef = C38480BE18A2E392001D174F /* lens_main.png */; };
 		C3ACEBCB1893036D0052E182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBCA1893036D0052E182 /* Foundation.framework */; };
 		C3ACEBCD1893036D0052E182 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBCC1893036D0052E182 /* CoreGraphics.framework */; };
 		C3ACEBCF1893036D0052E182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ACEBCE1893036D0052E182 /* UIKit.framework */; };
@@ -90,6 +91,7 @@
 		C36A3BFB189ADBC0002B900E /* LensAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensAuthor.m; sourceTree = "<group>"; };
 		C37B07A8189808C300E99727 /* LensNetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensNetworkController.h; sourceTree = "<group>"; };
 		C37B07A9189808C300E99727 /* LensNetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensNetworkController.m; sourceTree = "<group>"; };
+		C38480BE18A2E392001D174F /* lens_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lens_main.png; path = Images.xcassets/lens_main.png; sourceTree = "<group>"; };
 		C3ACEBC71893036D0052E182 /* LensApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LensApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3ACEBCA1893036D0052E182 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C3ACEBCC1893036D0052E182 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -284,6 +286,7 @@
 		C3ACEBD31893036D0052E182 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C38480BE18A2E392001D174F /* lens_main.png */,
 				C3ACEBD41893036D0052E182 /* LensApp-Info.plist */,
 				C3ACEBD51893036D0052E182 /* InfoPlist.strings */,
 				C3ACEBD81893036D0052E182 /* main.m */,
@@ -390,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3ACEBE31893036D0052E182 /* Main_iPad.storyboard in Resources */,
+				C38480BF18A2E392001D174F /* lens_main.png in Resources */,
 				C3ACEBEE1893036D0052E182 /* Images.xcassets in Resources */,
 				C3ACEBE01893036D0052E182 /* Main_iPhone.storyboard in Resources */,
 				C3ACEBD71893036D0052E182 /* InfoPlist.strings in Resources */,
