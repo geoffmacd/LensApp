@@ -42,6 +42,15 @@
     
 }
 
+//-(void)viewDidAppear:(BOOL)animated{
+//        [self.navigationController setNavigationBarHidden:YES animated:animated];
+//}
+//
+//-(void)viewWillDisappear:(BOOL)animated{
+//    
+//    [self.navigationController setNavigationBarHidden:NO animated:animated];
+//}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -55,8 +64,9 @@
     _slideView = [[LensSlideView alloc] initWithFrame:CGRectMake(0, 0, _webview.frame.size.width, 280)];
     
     [self.webview addSubview:self.slideView];
+    [self.webview setBackgroundColor:[UIColor blackColor]];
     [_webview setDelegate:self];
-    UIEdgeInsets inset = UIEdgeInsetsMake(280, 0, 0, 0);
+    UIEdgeInsets inset = UIEdgeInsetsMake(250, 0, 0, 0);
     [self.webview.scrollView setContentInset:inset];
     
     [self configureView];

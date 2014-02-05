@@ -168,10 +168,10 @@
             </objects>
             <point key="canvasLocation" x="459" y="64"/>
         </scene>
-        <!--Lens Detail View Controller - Detail-->
+        <!--Lens Detail View Controller-->
         <scene sceneID="Cn3-H9-jdl">
             <objects>
-                <viewController title="Detail" id="Ah7-4n-0Wa" customClass="LensDetailViewController" sceneMemberID="viewController">
+                <viewController id="Ah7-4n-0Wa" customClass="LensDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CH1-K1-3Te"/>
                         <viewControllerLayoutGuide type="bottom" id="45a-F4-rfa"/>
@@ -194,7 +194,10 @@
                             <constraint firstItem="45a-F4-rfa" firstAttribute="top" secondItem="lbB-uD-Oo9" secondAttribute="bottom" id="swb-uL-NKE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Story" id="cra-N8-TIN"/>
+                    <navigationItem key="navigationItem" id="cra-N8-TIN"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="webview" destination="lbB-uD-Oo9" id="iPu-73-dBI"/>
                     </connections>

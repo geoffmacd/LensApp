@@ -71,8 +71,12 @@
 //            }
             
             //add img which is always first child
-            NSString * imgTag = [[element firstChild] description];
-            result = [NSString stringWithFormat:@"<div>%@<span>%@</span></div>",imgTag, contents];
+//            NSString * imgTag = [[element firstChild] description];
+            NSString * imgSource = [element nextElement].attributes[@"src"];
+            //style image to be width of screen,caption has different size
+            CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+            CGFloat height = (width * 2.0) / 3.0;
+            result = [NSString stringWithFormat:@"<div><img src='%@' height=%.0f width=%.0f><figcaption style='font-size: small;'>%@</figcaption></div>",imgSource, height, width, contents];
         }
         
         //add to array to display natively
