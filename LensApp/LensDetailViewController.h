@@ -16,7 +16,7 @@
 @property LensPost * post;
 
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
-@property (weak, nonatomic) IBOutlet LensSlideView *slideView;
+@property LensSlideView *slideView;
 
 -(void)setthis:(LensPost*)post;
 

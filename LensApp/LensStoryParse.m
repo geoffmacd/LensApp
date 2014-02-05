@@ -79,8 +79,9 @@
         if(result)
             [results addObject:result];
 	}
-
-    __block NSString * html = @"<html><body>";
+    
+    //add black background stylingp
+    __block NSString * html = @"<html><body style='background-color: black;color: white;'>";
     [results enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         NSString * elStr = obj;

@@ -39,17 +39,27 @@
     
     [self.slideView setPost:self.post withContext:newContext];
     [self.webview loadHTMLString:self.post.story.htmlContent baseURL:nil];
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
     
     UINavigationItem * title = [[UINavigationItem alloc] init];
     UIBarButtonItem * custom = [[UIBarButtonItem alloc] initWithImage:[UIImage lensIconNamed:self.post.iconFile withPost:self.post.objectID] style:UIBarButtonItemStylePlain target:nil action:nil];
     [title setLeftBarButtonItem:custom];
+    
+    //add slideview to top of webview
+    _slideView = [[LensSlideView alloc] initWithFrame:CGRectMake(0, 0, _webview.frame.size.width, 280)];
+    
+    [self.webview addSubview:self.slideView];
+    [_webview setDelegate:self];
+    UIEdgeInsets inset = UIEdgeInsetsMake(280, 0, 0, 0);
+    [self.webview.scrollView setContentInset:inset];
+    
+    [self configureView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,5 +83,15 @@
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
 }
+
+#pragma mark - UIWebViewDelegate
+
+//-(void)webViewDidFinishLoad:(UIWebView *)webView{
+//    [webView stringByEvaluatingJavaScriptFromString:@"var link = document.createElement('link');"
+//     "link.rel = 'stylesheet';"
+//     "link.type = 'text/css';"
+//     "link.href = 'text/css';"
+//     "document.getElementsByTagName('head')[0].appendChild(script);"];
+//}
 
 @end

@@ -76,6 +76,8 @@
     _scroll = scroll;
     [_scroll setDelegate:self];
     [self addSubview:scroll];
+    
+    [self setBackgroundColor:[UIColor blackColor]];
 }
 
 -(void)setPost:(LensPost *)post withContext:(NSManagedObjectContext*)context{
@@ -107,6 +109,11 @@
 
 -(void)imageRetrieved:(NSNotification*)notification{
     
+    [self performSelectorOnMainThread:@selector(replaceImage:) withObject:notification waitUntilDone:YES];
+}
+
+-(void)replaceImage:(NSNotification*)notification{
+    
     NSManagedObjectID * assetId = notification.userInfo[@"assetId"];
     NSString * filename = notification.name;
     //replace only that slide with correct image
@@ -115,7 +122,6 @@
     LensSlide * slide = _slideDict[assetId];
     UIImage * newImage = [UIImage lensImageNamed:filename withAsset:assetId];
     [slide.imageView setImage:newImage];
-    
 }
 
 -(void)populateSlides{
@@ -196,6 +202,7 @@
         //enable
         limitSlides = [_assets count];
     }
+    
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -235,6 +242,18 @@
     
     //animate scroll to discrete target
     [scrollView scrollRectToVisible:target animated:YES];
+    
 }
+
+-(BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    
+    if([gestureRecognizer class] == [UISwipeGestureRecognizer class]){
+        
+        
+        return YES;
+    }
+    return NO;
+}
+
 
 @end
