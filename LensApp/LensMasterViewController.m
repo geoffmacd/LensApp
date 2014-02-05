@@ -46,7 +46,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.view setTintColor:[UIColor redColor]];
+    
+    //set app style to grey
+    [self.navigationController.view setTintColor:[UIColor grayColor]];
     
     UIBarButtonItem *changeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(changeFormat)];
     self.navigationItem.rightBarButtonItem = changeButton;
