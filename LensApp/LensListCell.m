@@ -28,7 +28,7 @@
 }
 
 -(void)configure{
-    
+    [self.contentView setBackgroundColor:[UIColor blackColor]];
     
     _titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     _authorLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];

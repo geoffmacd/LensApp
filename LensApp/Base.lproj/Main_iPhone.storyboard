@@ -156,7 +156,7 @@
                                         <constraint firstItem="xdR-WB-mLO" firstAttribute="bottom" secondItem="3eO-wS-iRB" secondAttribute="bottom" id="xaG-Vd-3Lo"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <connections>
                                     <outlet property="authorLabel" destination="VUx-AQ-lrr" id="jfh-gH-Q7e"/>
                                     <outlet property="dateLabel" destination="xdR-WB-mLO" id="lzn-Ok-fDe"/>

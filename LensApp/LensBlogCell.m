@@ -28,6 +28,7 @@
 
 -(void)configure{
     
+    [self.contentView setBackgroundColor:[UIColor blackColor]];
 }
 
 -(void)configureCellForPost:(LensPost*)post{
