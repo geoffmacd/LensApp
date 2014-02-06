@@ -10,6 +10,12 @@
 
 @implementation LensAssetImageWrapper
 
+static NSMutableDictionary * requests;
+
++(void)initialize{
+    requests = [[NSMutableDictionary alloc] init];
+}
+
 -(instancetype)initWithName:(NSString*)fileName assetId:(NSManagedObjectID*)assetId{
     if(self = [super init]){
         _isPersisted = NO;
@@ -23,6 +29,7 @@
 }
 
 -(UIImage *)image{
+    
     _getCount++;
     
     return _image;
@@ -32,12 +39,19 @@
     NSLog(@"fetching image from : %@", [fileURL description]);
     
     UIImage * result;
-
-    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
-    result = [UIImage imageWithData:data];
-    _image = result;
-    if(result)
-        return YES;
+    
+    NSDate * oldReq = requests[[fileURL lastPathComponent]];
+    if(!oldReq){
+        requests[[fileURL lastPathComponent]] = [NSDate date];
+        NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+        //remove key
+        [requests removeObjectForKey:[fileURL lastPathComponent]];
+        result = [UIImage imageWithData:data];
+        _image = result;
+        if(result)
+            return YES;
+        return NO;
+    }
     return NO;
 }
 

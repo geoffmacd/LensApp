@@ -62,5 +62,5 @@
 -(void)saveImage:(LensAssetImageWrapper*)wrapperToSave;
 
 -(void)persistAndFlush;
-
+-(void)evictRow:(NSArray*)assets;
 @end

@@ -222,6 +222,18 @@
     count = 0;
     [self removeAllObjects];
 }
+
+-(void)evictRow:(NSArray*)assets{
+    //don't evict first
+    [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if(idx != 0){
+            LensAsset * curAsset = obj;
+            [self removeObjectForKey:curAsset.filename];
+        }
+        
+    }];
+    
+}
          
 
 #pragma mark NSCacheDelegate

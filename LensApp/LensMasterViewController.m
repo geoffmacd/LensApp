@@ -282,4 +282,11 @@
     
     [cell configureCellForPost:post];
 }
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    //need to invalidate cache of current row
+
+    //notify slide to invalidate cache
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldInvalidateCacheRow" object:self];
+}
 @end

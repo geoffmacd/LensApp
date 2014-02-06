@@ -14,6 +14,7 @@
 #define kXpadding       10
 #define kAssetHeight    200
 #define kcaptionHeight  40
+#define kAssetsPreloaded    1
 
 
 @interface LensSlideView : UIView <UIScrollViewDelegate> {

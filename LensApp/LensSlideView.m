@@ -8,6 +8,7 @@
 
 #import "LensSlideView.h"
 #import "UIImage+UILensImage.h"
+#import "LensNetworkController.h"
 
 
 @interface LensSlide : UIView
@@ -82,6 +83,9 @@
 
 -(void)setPost:(LensPost *)post withContext:(NSManagedObjectContext*)context{
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self invalidateCache];
+    
     //set post
     _post = post;
     
@@ -100,10 +104,10 @@
         LensSlide * slide = obj;
         [slide removeFromSuperview];
     }];
-    _slideDict = [[NSMutableDictionary alloc] initWithCapacity:15];
+    _slideDict = [[NSMutableDictionary alloc] init];
     
-    //first 2 slides at first
-    limitSlides = 2;
+    //first slide only
+    limitSlides = kAssetsPreloaded;
     [self populateSlides];
 }
 
@@ -191,16 +195,34 @@
     [_scroll setContentSize:content.size];
     [_scroll setContentOffset:CGPointMake(0, 0) animated:YES];
     
-    maxScrolledX = fullWidth;
+    maxScrolledX = 0;
+}
+
+
+-(void)invalidateCache{
+    
+    //scroll to beginning
+    [_scroll scrollRectToVisible:CGRectMake(0, 0, assetWidth, assetHeight) animated:YES];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    //remove all assets from cache
+    [[[LensNetworkController sharedNetwork] imageCache] evictRow:_assets];
+    
+    limitSlides = kAssetsPreloaded;
 }
 
 #pragma mark UIScrollViewDelegate
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
-    if(limitSlides == 2){
+    if(limitSlides == kAssetsPreloaded){
         //enable
         limitSlides = [_assets count];
+        //invalidate potential cached rows
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shouldInvalidateCacheRow" object:self];
+        //register self for didInvalidateCacheRow
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invalidateCache) name:@"shouldInvalidateCacheRow" object:nil];
     }
     
 }
