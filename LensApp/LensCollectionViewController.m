@@ -35,7 +35,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self didRotate];
     
     
     //observe persistence changes
@@ -49,6 +48,7 @@
     
     //retrieve current posts
     [[LensNetworkController sharedNetwork] getCurrentPosts];
+    [self didRotate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
