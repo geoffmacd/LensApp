@@ -10,6 +10,7 @@
 
 #import "LensMasterViewController.h"
 #import "LensNetworkController.h"
+#import "LensCollectionViewController.h"
 
 @implementation LensAppDelegate
 
@@ -21,22 +22,32 @@
 {
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        splitViewController.delegate = (id)navigationController.topViewController;
         
-        UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
-        LensMasterViewController *controller = (LensMasterViewController *)masterNavigationController.topViewController;
+        UINavigationController *masterNavigationController = (UINavigationController *)self.window.rootViewController;
+        //set app style to grey
+        [masterNavigationController.view setTintColor:[UIColor grayColor]];
+        LensCollectionViewController *controller = (LensCollectionViewController *)masterNavigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     } else {
         UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+        //set app style to grey
+        [navigationController.view setTintColor:[UIColor grayColor]];
         LensMasterViewController *controller = (LensMasterViewController *)navigationController.topViewController;
         controller.managedObjectContext = self.managedObjectContext;
     }
     
+    
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lowMemory:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logNot:) name:nil object:nil];
     
     return YES;
+}
+
+-(void)logNot:(NSNotification*)notification{
+    
+    NSLog(@"%@", notification.name);
 }
 
 -(void)lowMemory:(NSNotification *)notification{

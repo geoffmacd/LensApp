@@ -74,7 +74,7 @@
 //            NSString * imgTag = [[element firstChild] description];
             NSString * imgSource = [element nextElement].attributes[@"src"];
             //style image to be width of screen,caption has different size
-            CGFloat width = [[UIScreen mainScreen] bounds].size.width;
+            CGFloat width = [[UIScreen mainScreen] bounds].size.width - 20;
             CGFloat height = (width * 2.0) / 3.0;
             result = [NSString stringWithFormat:@"<div><img src='%@' height=%.0f width=%.0f><figcaption style='font-size: small;'>%@</figcaption></div>",imgSource, height, width, contents];
         }

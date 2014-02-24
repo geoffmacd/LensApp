@@ -12,6 +12,8 @@
 		24E42101189C8ECB0030C750 /* LensArchiveParse.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E42100189C8ECB0030C750 /* LensArchiveParse.m */; };
 		67B97EA0189EBF2200E0FFAA /* UIImage+UILensImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B97E9F189EBF2200E0FFAA /* UIImage+UILensImage.m */; };
 		B538BB5316864AF98F063ED1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2DE5F6974B74BEF99CFB478 /* libPods.a */; };
+		C314B2F418BBC05B00B08CA0 /* LensCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C314B2F318BBC05B00B08CA0 /* LensCollectionViewController.m */; };
+		C314B2F718BBC18500B08CA0 /* LensCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C314B2F618BBC18500B08CA0 /* LensCollectionCell.m */; };
 		C339F4F3189AF20C00416632 /* LensImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C339F4F2189AF20C00416632 /* LensImageCache.m */; };
 		C339F4F6189AF72100416632 /* LensAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = C339F4F5189AF72100416632 /* LensAsset.m */; };
 		C36A3BD21899A119002B900E /* LensPostParse.m in Sources */ = {isa = PBXBuildFile; fileRef = C36A3BD11899A119002B900E /* LensPostParse.m */; };
@@ -69,6 +71,10 @@
 		5D88A05A68EE4C4FAF04D141 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		67B97E9E189EBF2200E0FFAA /* UIImage+UILensImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UILensImage.h"; sourceTree = "<group>"; };
 		67B97E9F189EBF2200E0FFAA /* UIImage+UILensImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UILensImage.m"; sourceTree = "<group>"; };
+		C314B2F218BBC05B00B08CA0 /* LensCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensCollectionViewController.h; sourceTree = "<group>"; };
+		C314B2F318BBC05B00B08CA0 /* LensCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensCollectionViewController.m; sourceTree = "<group>"; };
+		C314B2F518BBC18500B08CA0 /* LensCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensCollectionCell.h; sourceTree = "<group>"; };
+		C314B2F618BBC18500B08CA0 /* LensCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensCollectionCell.m; sourceTree = "<group>"; };
 		C339F4F1189AF20C00416632 /* LensImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensImageCache.h; sourceTree = "<group>"; };
 		C339F4F2189AF20C00416632 /* LensImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LensImageCache.m; sourceTree = "<group>"; };
 		C339F4F4189AF72100416632 /* LensAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LensAsset.h; sourceTree = "<group>"; };
@@ -154,6 +160,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C314B2F118BBC01500B08CA0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				24E420FF189C8ECB0030C750 /* LensArchiveParse.h */,
+				24E42100189C8ECB0030C750 /* LensArchiveParse.m */,
+				C36A3BD01899A119002B900E /* LensPostParse.h */,
+				C36A3BD11899A119002B900E /* LensPostParse.m */,
+				C36A3BEB1899C175002B900E /* LensAssetsParse.h */,
+				C36A3BEC1899C175002B900E /* LensAssetsParse.m */,
+				C36A3BEE189AC5A3002B900E /* LensRequest.h */,
+				C36A3BEF189AC5A3002B900E /* LensRequest.m */,
+				C3C958B7189C1BB600D628F6 /* LensStoryParse.h */,
+				C3C958B8189C1BB600D628F6 /* LensStoryParse.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 		C339F4F0189AF1F900416632 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,24 +222,14 @@
 		C37B07BB18982BB100E99727 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C3B9BCEB18A0355F0080A7E5 /* LensSlideView.h */,
-				C3B9BCEC18A0355F0080A7E5 /* LensSlideView.m */,
 				C37B07A8189808C300E99727 /* LensNetworkController.h */,
 				C37B07A9189808C300E99727 /* LensNetworkController.m */,
 				C3ACEBE71893036D0052E182 /* LensMasterViewController.h */,
 				C3ACEBE81893036D0052E182 /* LensMasterViewController.m */,
 				C3ACEBEA1893036D0052E182 /* LensDetailViewController.h */,
 				C3ACEBEB1893036D0052E182 /* LensDetailViewController.m */,
-				24E420FF189C8ECB0030C750 /* LensArchiveParse.h */,
-				24E42100189C8ECB0030C750 /* LensArchiveParse.m */,
-				C36A3BD01899A119002B900E /* LensPostParse.h */,
-				C36A3BD11899A119002B900E /* LensPostParse.m */,
-				C36A3BEB1899C175002B900E /* LensAssetsParse.h */,
-				C36A3BEC1899C175002B900E /* LensAssetsParse.m */,
-				C36A3BEE189AC5A3002B900E /* LensRequest.h */,
-				C36A3BEF189AC5A3002B900E /* LensRequest.m */,
-				C3C958B7189C1BB600D628F6 /* LensStoryParse.h */,
-				C3C958B8189C1BB600D628F6 /* LensStoryParse.m */,
+				C314B2F218BBC05B00B08CA0 /* LensCollectionViewController.h */,
+				C314B2F318BBC05B00B08CA0 /* LensCollectionViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -228,8 +241,12 @@
 				C3B9BCE818A0355F0080A7E5 /* LensBlogCell.m */,
 				C3B9BCE918A0355F0080A7E5 /* LensListCell.h */,
 				C3B9BCEA18A0355F0080A7E5 /* LensListCell.m */,
+				C3B9BCEB18A0355F0080A7E5 /* LensSlideView.h */,
+				C3B9BCEC18A0355F0080A7E5 /* LensSlideView.m */,
 				C3ACEBDE1893036D0052E182 /* Main_iPhone.storyboard */,
 				C3ACEBE11893036D0052E182 /* Main_iPad.storyboard */,
+				C314B2F518BBC18500B08CA0 /* LensCollectionCell.h */,
+				C314B2F618BBC18500B08CA0 /* LensCollectionCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -270,6 +287,7 @@
 		C3ACEBD21893036D0052E182 /* LensApp */ = {
 			isa = PBXGroup;
 			children = (
+				C314B2F118BBC01500B08CA0 /* Network */,
 				C339F4F0189AF1F900416632 /* Utility */,
 				C36A3BC918999D5C002B900E /* Categories */,
 				C37B07BC18982BCE00E99727 /* Views */,
@@ -450,10 +468,12 @@
 			files = (
 				C339F4F3189AF20C00416632 /* LensImageCache.m in Sources */,
 				67B97EA0189EBF2200E0FFAA /* UIImage+UILensImage.m in Sources */,
+				C314B2F418BBC05B00B08CA0 /* LensCollectionViewController.m in Sources */,
 				C36A3BD21899A119002B900E /* LensPostParse.m in Sources */,
 				24E42101189C8ECB0030C750 /* LensArchiveParse.m in Sources */,
 				C36A3BF9189ADBC0002B900E /* LensTag.m in Sources */,
 				244AF664189D7B6D004A7C67 /* LensAssetImageWrapper.m in Sources */,
+				C314B2F718BBC18500B08CA0 /* LensCollectionCell.m in Sources */,
 				C36A3BF0189AC5A3002B900E /* LensRequest.m in Sources */,
 				C3ACEBDD1893036D0052E182 /* LensAppDelegate.m in Sources */,
 				C36A3BED1899C175002B900E /* LensAssetsParse.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "LensMasterViewController.h"
 
+#import "LensPost.h"
 #import "LensDetailViewController.h"
 #import "LensNetworkController.h"
 #import "LensStory.h"
@@ -15,20 +16,7 @@
 #import "LensListCell.h"
 #import "LensSlideView.h"
 
-@interface LensMasterViewController ()
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
-@end
-
 @implementation LensMasterViewController
-
-- (void)awakeFromNib
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        self.clearsSelectionOnViewWillAppear = NO;
-        self.preferredContentSize = CGSizeMake(640.0, 600.0);
-    }
-    [super awakeFromNib];
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     
@@ -47,8 +35,6 @@
 {
     [super viewDidLoad];
     
-    //set app style to grey
-    [self.navigationController.view setTintColor:[UIColor grayColor]];
     
     UIBarButtonItem *changeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(changeFormat)];
     self.navigationItem.rightBarButtonItem = changeButton;
@@ -140,15 +126,6 @@
 {
     // The table view should not be re-orderable.
     return NO;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        
-        LensPost *post = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [self.detailViewController setthis:post];
-    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
