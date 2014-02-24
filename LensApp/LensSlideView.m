@@ -71,10 +71,29 @@
     return self;
 }
 
+-(void)didRotate:(NSNotification*)notification{
+    
+    //reset slideshow to correct width
+    
+    //set blank dictionary
+    //remove first
+    [_slideDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        LensSlide * slide = obj;
+        [slide removeFromSuperview];
+    }];
+    _slideDict = [[NSMutableDictionary alloc] init];
+    
+    //first slide only
+    limitSlides = kAssetsPreloaded;
+    [self populateSlides];
+}
+
 -(void)configure{
+    
     //add slider of same frame
     UIScrollView * scroll = [[UIScrollView alloc] initWithFrame:self.bounds];
     _scroll = scroll;
+    _scroll.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [_scroll setDelegate:self];
     [self addSubview:scroll];
     
@@ -83,8 +102,8 @@
 
 -(void)setPost:(LensPost *)post withContext:(NSManagedObjectContext*)context{
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self invalidateCache];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
     
     //set post
     _post = post;
