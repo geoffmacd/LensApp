@@ -12,7 +12,7 @@
 
 @class LensDetailViewController;
 
-@interface LensCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate>
+@interface LensCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) LensDetailViewController *detailViewController;
 
