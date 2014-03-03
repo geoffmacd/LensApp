@@ -27,7 +27,6 @@
     if (self) {
         // Custom initialization
         [self didRotate];
-//        [self.collectionView setDelegate:self];
     }
     return self;
 }
@@ -36,8 +35,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    
+
     
     //observe persistence changes
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -47,7 +45,12 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGSize size  = CGSizeMake( 100 + arc4random_uniform(200), 200 + arc4random_uniform(200));
+    
+    CGSize size  = CGSizeMake( 270, 400);
+    
+    if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown)
+        size  = CGSizeMake( 320, 400);
+    
     return size;
 }
 
@@ -56,29 +59,15 @@
     //retrieve current posts
     [[LensNetworkController sharedNetwork] getCurrentPosts];
     [self didRotate];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 -(void)didRotate{
     
-//    if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortrait || [[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown){
-//        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-//        layout.itemSize = CGSizeMake(350, 400);
-//        
-//        [self.collectionView setCollectionViewLayout:layout];
-//    } else {
-//        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-//        layout.itemSize = CGSizeMake(300, 400);
-//        
-//        [self.collectionView setCollectionViewLayout:layout];
-//    }
     
     LensLayout * layout = [[LensLayout alloc] init];
     
     [self.collectionView setCollectionViewLayout:layout];
-    
-    
 }
 
 
@@ -210,7 +199,6 @@
     LensPost *post = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     [colCell configureCellForPost:post];
-    
 }
 
 

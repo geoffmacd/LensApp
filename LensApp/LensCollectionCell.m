@@ -39,9 +39,9 @@
     
     
     _title.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    _author.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
-    _date.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
-    _excerpt.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+//    _author.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    _date.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    _excerpt.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
     
     NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMMM dd, yyyy"];

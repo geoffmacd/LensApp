@@ -35,9 +35,14 @@
     NSString * key = image.intendedName;
     [self setObject:image forKey:key];
     
+    image = [self objectForKey:key];
+    
     //notify view controllers image is available
-    if(image.assetId)   //only images not icons
-        [[NSNotificationCenter defaultCenter] postNotificationName:image.intendedName object:self userInfo:@{@"assetId":image.assetId}];
+    if(image.assetId){   //only images not icons
+        __block NSString * name = image.intendedName;
+        __block NSManagedObjectID * asset = image.assetId;
+        [[NSNotificationCenter defaultCenter] postNotificationName:name object:self userInfo:@{@"assetId":asset}];
+    }
 }
 
 -(void)persistImage:(LensAssetImageWrapper*)image removeFromCache:(BOOL)remove{
@@ -50,8 +55,10 @@
     }
     
     //purge from cache
-    if(remove)
+    if(remove){
         [self removeObjectForKey:image.intendedName];
+        count--;
+    }
 }
 
 -(UIImage*)retrieveImage:(NSString*)filename withAsset:(NSManagedObjectID*)assetId doNotRequest:(BOOL)doNotRequest{
@@ -123,13 +130,6 @@
         return image.image;
     }
 }
-
-//-(UIImage *)loadImage:(NSString *)fileName ofType:(NSString *)extension{
-//    
-//    NSString * path = [NSString stringWithFormat:@"%@/%@.%@", [self imageDirectory], fileName, extension];
-//    UIImage * result = [UIImage imageWithContentsOfFile:path];
-//    return result;
-//}
 
 -(void)saveImage:(LensAssetImageWrapper*)wrapperToSave {
     
@@ -229,12 +229,11 @@
         if(idx != 0){
             LensAsset * curAsset = obj;
             [self removeObjectForKey:curAsset.filename];
+            count--;
         }
         
     }];
-    
 }
-         
 
 #pragma mark NSCacheDelegate
 

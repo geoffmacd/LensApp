@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UILabel *author;
-@property (weak, nonatomic) IBOutlet UITextView *excerpt;
+@property (weak, nonatomic) IBOutlet UILabel *excerpt;
 @property (weak, nonatomic) IBOutlet UIImageView *slideview;
 
 
